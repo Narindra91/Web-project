@@ -1,0 +1,158 @@
+/* Add your JavaScript code here.
+
+If you are using the jQuery library, then don't forget to wrap your code inside jQuery.ready() as follows:
+
+jQuery(document).ready(function( $ ){
+    // Your code in here
+});
+
+--
+
+If you want to link a JavaScript file that resides on another server (similar to
+<script src="https://example.com/your-js-file.js"></script>), then please use
+the "Add HTML Code" page, as this is a HTML code that links a JavaScript file.
+
+End of comment */ 
+
+/* $('.menu_scroll').hide();    
+
+$('.menu_scroll').scroll(function()
+{
+  $('.menu_scroll').show();
+}); */
+
+    jQuery(document).ready(function() /* Icône barre de recherche dans le menu navbar */
+    {
+        jQuery('.menu-right ul li.widget:nth-child(3)').css('display','none');
+        jQuery("i.fa.fa-search").click(function() 
+        {
+            jQuery('.menu-right ul li.widget:nth-child(3)').css('display','inline-block');
+            jQuery('li.menu-right ul li:nth-child(4)').attr('style', 'margin: 0px !important');
+            jQuery('div#ajaxsearchlite2').css('margin','0px');
+            jQuery('#ajaxsearchlite2 .probox').animate({width: "220px"}, "slow");
+            jQuery('#ajaxsearchlite2 .probox').css('width','auto');
+            jQuery("i.fa.fa-search").fadeOut();
+        });
+         jQuery('#main-content').on('click',function()
+        {
+            jQuery('li.menu-right ul li:nth-child(4)').attr('style', 'margin: auto !important');
+            jQuery('.menu-right ul li.widget:nth-child(3)').css('display','none');
+            jQuery('#ajaxsearchlite2 .probox').animate({width: "0px"}, "slow");
+            jQuery('#ajaxsearchlite2 .probox').css('width','0');
+            jQuery("i.fa.fa-search").fadeIn();
+        })
+    });
+   jQuery(document).ready(function() /*Affichage icône des boutons dans le menu navbar*/
+    {
+    jQuery('div#menu_bouton_footer i.fa.fa-caret-down').css('display','none');
+        jQuery(".bouton_menu" ).hover(
+        function() 
+        {
+           jQuery(this).find('svg').removeClass('svg_ico').addClass('svg_ico_after');
+        },
+        function() 
+        {
+           jQuery(this).find('svg').addClass('svg_ico').removeClass('svg_ico_after');
+        });
+ 	});
+    
+    
+
+// dropdown evolution by gerard
+jQuery( document ).ready(function(){
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function(){
+
+ jQuery("#menu_bouton_navbar .sous_menu_hover").slideDown('low');
+ 
+  },  function(){
+  
+  if (jQuery("#menu_bouton_navbar .sous_menu_hover").is( ":visible" )){
+  
+       var teste = setTimeout(function(){
+        jQuery("#menu_bouton_navbar .sous_menu_hover").slideUp(1000);
+        }, 5000);  
+  }
+  
+  jQuery("#menu_bouton_navbar .sous_menu_hover").hover(function(){
+	clearTimeout(teste);
+    jQuery(this).show();
+   
+	
+	}, function(){
+	
+	jQuery(this).slideUp('low');
+	
+	});
+  
+  
+  
+  });
+  
+   
+
+})
+
+
+
+  jQuery( document ).ready(function() /*Captcha somme dans input inscription*/
+    {   
+        function getRandom(){return Math.ceil(Math.random()* 10);} 
+        function createSum()
+        {
+           var rNum1 = getRandom(),
+               rNum2 = getRandom();
+           var total =rNum1 + rNum2; 
+           jQuery("input#captcha-20360").attr("placeholder", rNum1+' + '+ rNum2 +' =' );
+           return total; 
+        } 
+        var total_1 = createSum();
+        
+        jQuery('.um-form[data-mode=register]').submit(function(event) 
+        {
+            var entrer_par_user = jQuery("input#captcha-20360").val();
+            if(entrer_par_user.length != 0)
+            {
+                    if(total_1 == entrer_par_user)
+                    {
+                        
+                    }
+                    else
+                    {
+                        Swal.fire({
+                                    icon: 'error',
+                                    title: '<h3>ReCaptcha</h3>',
+                                    text: 'Mauvaise reponse !',
+                                    confirmButtonText:
+    ' <p style="text-transform: lowercase"><i class="fa fa-refresh fa-pulse"></i> réessayer ?</p>',
+  confirmButtonAriaLabel: 'Thumbs up, great!'
+                                });
+                          
+                          
+                        jQuery('input#um-submit-btn').removeAttr("disabled");   
+                        event.preventDefault();
+                        total_1;
+    
+                    }
+            }
+            else
+            {
+                Swal.fire({
+                            icon: 'warning',
+                            title: '<h3>ReCaptcha</h3>',
+                            text: 'Vous devez remplir le reCaptcha !',
+                            confirmButtonText:
+                              '<p style="text-transform: lowercase"><i class="fa fa-refresh fa-pulse"></i> réessayer ?</p>',
+  confirmButtonAriaLabel: 'Thumbs up, great!'
+                        });
+                        
+                         jQuery('input#um-submit-btn').removeAttr("disabled");
+                          event.preventDefault();
+                
+                          total_1;
+      
+            }
+       
+    });
+});
+
+/*jQuery(".event-search .orig").attr('placeholder','Trouve un atelier, un séminaire, une salle…');*/

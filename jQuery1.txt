@@ -1,0 +1,540 @@
+/* Add your JavaScript code here.
+
+If you are using the jQuery library, then don't forget to wrap your code inside jQuery.ready() as follows:
+
+jQuery(document).ready(function( $ ){
+    // Your code in here
+});
+
+--
+
+If you want to link a JavaScript file that resides on another server (similar to
+<script src="https://example.com/your-js-file.js"></script>), then please use
+the "Add HTML Code" page, as this is a HTML code that links a JavaScript file.
+
+End of comment */
+// suppresion produit fil ariane
+  jQuery(document).ready(function() {
+document.querySelectorAll('.mon_ariane a')[1].nextSibling.remove();
+document.querySelectorAll('.mon_ariane a')[1].remove();
+  });
+
+//ampoule deplacement
+
+jQuery(document).ready(function() {
+
+navigator.saysWho = (() => {
+  const { userAgent } = navigator
+  let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+  let temp
+
+  if (/trident/i.test(match[1])) {
+    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
+
+    return `IE ${temp[1] || ''}`
+  }
+
+    if (match[1] === 'Chrome') {
+    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera')
+    }
+
+    temp = userAgent.match(/\b(Edg)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('Edg', 'Edge (Chromium)')
+    }
+  }
+
+  match = match[2] ? [ match[1], match[2] ] : [ navigator.appName, navigator.appVersion, '-?' ]
+  temp = userAgent.match(/version\/(\d+)/i)
+
+  if (temp !== null) {
+    match.splice(1, 1, temp[1])
+  }
+
+  return match.join(' ')
+})()
+
+//console.log(navigator.saysWho) // outputs: `Chrome 89`
+
+ browser = navigator.saysWho;
+ var bros = browser;
+ 
+ var mon_navig = bros.substr(0, 7);
+
+if(mon_navig == "Firefox")
+{
+	
+    
+// Firefox
+jQuery('.elementor-background-overlay').html('<img class="fit-picture" src="https://www.skiillz.com/wp-content/uploads/2021/07/suggestions_idees_skiilz1.png">');
+jQuery('.fit-picture').css({'position' : 'relative'} );
+
+jQuery(window).scroll(function (event) {
+ var teste= jQuery(window).scrollTop();
+ 
+ if(teste > 3441.949951171875 && teste < 3546.949951171875){
+  
+ jQuery('.fit-picture').animate({left: '50px'}, 50);
+ 
+ }else if(teste > 3546.949951171875 && teste <= 3651.949951171875){
+ 
+ jQuery('.fit-picture').animate({left: '100px'}, 50);
+ 
+ }else if(teste > 3651.949951171875 && teste <= 3756.949951171875  ){
+ 
+ jQuery('.fit-picture').animate({left: '150px' }, 50);
+	 
+ }else if(teste > 3756.949951171875 && teste <=  3861.949951171875   ){
+ 
+ jQuery('.fit-picture').animate({left: '200px' }, 50);
+	 
+ }else if(teste >  3861.949951171875 && teste <=  3966.949951171875  ){
+ 
+ jQuery('.fit-picture').animate({left: '250px' }, 50);
+ 
+ }else if(teste >  3966.949951171875  && teste <=  4071.949951171875   ){
+ 
+ jQuery('.fit-picture').animate({left: '300px' }, 50);
+ 
+ }else if(teste >  4071.949951171875 && teste <=  4176.9501953125 ){
+ 
+jQuery('.fit-picture').animate({left: '330px' }, 50);
+ 
+ }else if(teste >  4176.9501953125  && teste <=  4281.9501953125 ){
+ 
+jQuery('.fit-picture').animate({left: '330px' }, 50);
+ 
+ }
+ 
+ else{
+ 
+ // jQuery('.fit-picture').animate({left: '10px'}, 50) // tapitra eto;
+ 
+ }
+
+});
+
+
+}
+else
+{
+
+
+// Chrome et safaris
+jQuery('.elementor-background-overlay').html('<img class="fit-picture" src="https://www.skiillz.com/wp-content/uploads/2021/07/suggestions_idees_skiilz1.png">');
+jQuery('.fit-picture').css({'position' : 'relative'} );
+
+jQuery(window).scroll(function (event) {
+ var teste= jQuery(window).scrollTop();
+ 
+ if(teste > 2632.5 && teste < 2757.5){
+  
+ jQuery('.fit-picture').animate({left: '50px'}, 50);
+ 
+ }else if(teste > 2757.5 && teste <= 2882.2){
+ 
+ jQuery('.fit-picture').animate({left: '100px'}, 50);
+ 
+ }else if(teste > 2882.2 && teste <= 3007.5  ){
+ 
+ jQuery('.fit-picture').animate({left: '150px' }, 50);
+	 
+ }else if(teste > 3007.5 && teste <=  3132.5   ){
+ 
+ jQuery('.fit-picture').animate({left: '200px'}, 50);
+	 
+ }else if(teste >  3132.5  && teste <=  3257.5   ){
+ 
+ jQuery('.fit-picture').animate({left: '250px' }, 50);
+ 
+ }else if(teste >  3257.5  && teste <=  3382.5   ){
+ 
+ jQuery('.fit-picture').animate({left: '300px'}, 50);
+ 
+ }else if(teste >  3382.5  && teste <=  3507.5  ){
+ 
+jQuery('.fit-picture').animate({left: '350px' }, 50);
+ 
+ }else if(teste >  3507.5  && teste <=  3632.5  ){
+ 
+jQuery('.fit-picture').animate({left: '350px'}, 50);
+ 
+ }
+ else{
+ 
+ jQuery('.fit-picture').animate({left: '10px'}, 50);
+ // tapitra eto
+ 
+ }
+})
+
+}
+  });
+  
+
+// menu embugeur
+jQuery(document).ready(function() {
+
+if (window.matchMedia('(max-width: 768px)').matches){
+var emburgeur = jQuery('ul.nav.navbar-nav').prepend('<li style="float:right;padding:5% 7% 0 0;z-index: 999;" class="mon_burger"><i class="fas fa-bars" id="click_menu" style="font-size:1em;cusror:pointer;opacity:0.8"></i></li>')
+jQuery('.menu-mobile-effect.navbar-toggle').click(function(){
+ jQuery('.mobile-menu-wrapper').show(1000)
+});
+
+jQuery('i#click_menu').click(function(){
+jQuery('.mobile-menu-wrapper').hide(1000)
+});
+
+}
+});
+
+
+ 
+ 
+ 
+window.addEventListener('load', function () {
+    jQuery('.oxi-tabs-header-li').on('click',function(){
+      setTimeout(function()
+      {
+              window.dispatchEvent(new Event('resize'));
+
+      },1000)
+    })
+    
+    setTimeout(function(){
+    var title_smart_post = document.querySelectorAll('.product__title a.title')
+    Array.prototype.forEach.call(title_smart_post, function (el)
+    {
+        var tab = el.textContent.split(" ")
+        if(tab.length < 4)
+        {
+            jQuery("<br/>").insertAfter(el)
+        }
+    });
+    },2000)
+    jQuery('.return-to-shop .wc-backward').text('retrouve Nos Formations');
+    
+
+})
+
+  /*  var title_smart_post = document.querySelectorAll('.atw_item_title a')
+  Array.prototype.forEach.call(title_smart_post, function (el) 
+  {
+      var tab = el.textContent.split(" ")
+      if(tab.length > 4)
+      {
+          el.innerHTML = tab.slice(0,4).join(" ") + "..."
+      }
+  });*/
+  
+jQuery(".elementor-shortcode span a").parent().css('color','white')
+  
+  
+var messageSucces=jQuery('.woocommerce-notices-wrapper .woocommerce-message a + span');
+messageSucces.text(messageSucces.text().replace("has been added to your cart", "a été ajouté à votre panier"));
+
+var buttonViewCart=jQuery('.woocommerce-notices-wrapper .woocommerce-message a');
+if(buttonViewCart.hasClass("wc-forward")){
+buttonViewCart.text(buttonViewCart.text().replace("View Cart", "Voir panier"));
+
+}
+
+//version final sticky
+jQuery(document).ready(function(){
+var $el = jQuery('#sticky-header-with-image');
+
+
+
+
+if (window.matchMedia('(max-width: 1006px)').matches)
+{
+$el.css({'background': 'white','width':'32vw','margin-left':'80vw'}); 
+}
+
+jQuery(window).scroll(function(e){ 
+ 
+  console.log(jQuery(this).scrollTop());
+
+ var isPositionFixed = ($el.css('position') == 'fixed');
+
+ 
+if (window.matchMedia('(max-width: 1006px)').matches)
+{
+
+$el.css({'background': 'white','width':'32vw','margin-left':'80vw'});
+
+if(jQuery('.woocommerce-info').length != 0){
+ 
+ 
+ 
+  if (jQuery(this).scrollTop() > 160 && jQuery(this).scrollTop() <= 700 && !isPositionFixed){ 
+    $el.css({'position': 'fixed', 'margin-top': '50px','background': 'white','width':'32vw','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+  }
+  }else{
+  
+  
+   if (jQuery(this).scrollTop() > 160 && jQuery(this).scrollTop() <= 670 && !isPositionFixed){ 
+    $el.css({'position': 'fixed', 'margin-top': '70px','background': 'white','width':'32vw','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+  }
+  
+  }
+   
+
+   if(jQuery('.woocommerce-info').length != 0){
+	   
+	 if (jQuery(this).scrollTop() >= 710 && jQuery(this).scrollTop() <= 2208 && isPositionFixed){ 
+    $el.css({'position': 'static','margin-top':'30%','background': 'white','width':'32vw','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+   console.log('tonge ee');
+  }
+  
+   }else{ 
+	if (jQuery(this).scrollTop() >= 680 && jQuery(this).scrollTop() <= 2208 && isPositionFixed){ 
+    $el.css({'position': 'static','margin-top':'45%','background': 'white','width':'32vw','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+   console.log('tonge ee');
+   }
+    }
+   
+   
+ if(jQuery('.woocommerce-info').length != 0){
+ 
+  if (jQuery(this).scrollTop() <= 700 && jQuery(this).scrollTop() > 200 && !isPositionFixed ){
+    $el.css({'position': 'fixed','width':'32vw','background': 'white','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+  } 
+  
+   }else{ 
+   
+	if (jQuery(this).scrollTop() <= 700 && jQuery(this).scrollTop() > 200 && !isPositionFixed ){
+    $el.css({'position': 'fixed','width':'32vw','background': 'white','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+  } 
+    }
+  
+
+  if (jQuery(this).scrollTop() < 200 && isPositionFixed){
+    $el.css({'position': 'static','margin-top': '-10vh','width':'32vw','background': 'white','margin-left':'80vw'}); 
+    console.log(jQuery(this).scrollTop());
+  }
+
+	
+}
+
+
+if (window.matchMedia('(min-width: 1007px)').matches){
+
+$el.css({'width':'22vw'});
+
+if(jQuery('.woocommerce-info').length != 0){
+ 
+  if (jQuery(this).scrollTop() > 160 && jQuery(this).scrollTop() <= 700 && !isPositionFixed){ 
+    $el.css({'position': 'fixed', 'margin-top': '50px','background': 'white','width':'22vw','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+  }
+  }else{
+  
+  
+   if (jQuery(this).scrollTop() > 160 && jQuery(this).scrollTop() <= 670 && !isPositionFixed){ 
+    $el.css({'position': 'fixed', 'margin-top': '110px','background': 'white','width':'22vw','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+  }
+  
+  }
+   
+
+   if(jQuery('.woocommerce-info').length != 0){
+	   
+	 if (jQuery(this).scrollTop() >= 710 && jQuery(this).scrollTop() <= 2208 && isPositionFixed){ 
+    $el.css({'position': 'static','margin-top':'90%','background': 'white','width':'22vw','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+   console.log('tonge ee');
+  }
+  
+   }else{ 
+	if (jQuery(this).scrollTop() >= 680 && jQuery(this).scrollTop() <= 2208 && isPositionFixed){ 
+    $el.css({'position': 'static','margin-top':'120%','background': 'white','width':'22vw','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+   console.log('tonge ee');
+   }
+    }
+   
+   
+ if(jQuery('.woocommerce-info').length != 0){
+ 
+  if (jQuery(this).scrollTop() <= 700 && jQuery(this).scrollTop() > 200 && !isPositionFixed ){
+    $el.css({'position': 'fixed','width':'22vw','background': 'white','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+  } 
+  
+   }else{ 
+   
+	if (jQuery(this).scrollTop() <= 700 && jQuery(this).scrollTop() > 200 && !isPositionFixed ){
+    $el.css({'position': 'fixed','width':'22vw','background': 'white','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+  } 
+    }
+  
+
+  if (jQuery(this).scrollTop() < 200 && isPositionFixed){
+    $el.css({'position': 'static','margin-top': '-8vh','width':'22vw','background': 'white','margin-left':'0'}); 
+    console.log(jQuery(this).scrollTop());
+  }
+
+ }
+
+ 
+
+});
+
+});
+
+
+
+
+jQuery(".event-search .orig").attr('placeholder','Trouve un atelier, un séminaire, une salle…');
+
+var affichagePrix=document.querySelectorAll(".atw_product_price,.showPrice");
+affichagePrix.forEach(function(userItem) {
+  userItem.firstChild.remove();
+  if (userItem.classList.contains("hide_apartir")) {
+    userItem.prepend('De : ');  
+  }if(userItem.classList.contains("produit_simple")){
+    userItem.prepend('De : ');  
+  }if (userItem.classList.contains("produit_reservable") && userItem.classList.contains("show_apartir")){
+    userItem.prepend('À partir de ');
+  }
+});
+
+
+     jQuery( document ).ready(function(){
+
+        var apres_parent = jQuery('.asl_loader')
+            jQuery('.asl_loader-inner.asl_simple-circle').remove();
+          
+         
+            apres_parent.append('<div><i class="fa fa-circle-o-notch fa-pulse"  style="color:#b838b2"><i></div>');
+      })
+
+//bouton nos formation
+jQuery(document).ready(function() {
+   
+var parent = jQuery('p.return-to-shop');
+jQuery('a.button.wc-backward').remove();
+
+var button = parent.css({'color': 'white'});
+button.html('<a class="button wc-backward" href="https://www.skiillz.com/nos-formations/">Retrouve Nos Formations</a>')
+jQuery('.button.wc-backward').css({'background-color':'#b838b2', 'color':'#fff','border-radius':'5px'});
+
+parent.hover(function(){
+   
+    jQuery('.button.wc-backward').css({'background-color':'#FFF', 'color':'#b838b2','border-radius':'3px', 'border':'2px solid #b838b2'});
+}, 
+
+function(){
+    jQuery('.button.wc-backward').css({'background-color':'#b838b2', 'color':'#fff','border-radius':'3px'});
+
+});
+   
+   });
+   
+
+jQuery(document).ready(function() {
+var play =jQuery('.elementor-custom-embed-image-overlay');
+var encours = jQuery('video.elementor-video');
+play.hover(function(){
+play.css('cursor','pointer');
+encours.css('cursor','pointer');
+play.click(function(){
+play.css({'display':'none'});
+});
+},
+function(){
+});
+   });
+   
+//deja favoris  
+ var elemFavorites=document.createElement('i');
+  var classFavoites=["fa", "fa-heart"];
+elemFavorites.classList.add(...classFavoites);
+jQuery(document).ready(function() {
+    if(document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').firstElementChild.classList.contains('wpf-favorite')){
+        document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite').nextSibling.remove();    
+        document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append('  ');
+        document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append(elemFavorites);
+
+    }else{
+        
+        document.querySelector('.boutton-favoris .favoris_ajoute .wpf-not-favorite').nextSibling.remove();    
+        document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append('  ');
+        document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append(elemFavorites);
+                
+    }
+});
+
+jQuery(document).ready(function() {
+    jQuery(document).ajaxSuccess(function(event, xhr, options) {
+    var data_boutton=options.data;
+    var params_data_boutton = new URLSearchParams('?' + data_boutton);
+        if(params_data_boutton.get('action') == 'wfp_action')
+            {
+                let res_data_js = jQuery(xhr.responseJSON.data);
+                var className = res_data_js.attr('class');
+                if(className == 'wpf-favorite'){
+                    document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite').nextSibling.remove();    
+                    document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append('  ');
+                    document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append(elemFavorites);
+                
+                }else
+                {
+                
+                document.querySelector('.boutton-favoris .favoris_ajoute .wpf-not-favorite').nextSibling.remove();    
+                document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append('  ');
+                document.querySelector('.boutton-favoris .favoris_ajoute .wpf-favorite-link').append(elemFavorites);
+                }
+            }
+        });
+    });
+     
+     
+     jQuery(document).ready(function() {
+     var te =jQuery('.carousel_page_formation .elementor-shortcode').text();
+console.log(te)
+if(te.length == 19){
+
+    jQuery('.carousel_page_formation .elementor-shortcode').first().remove()
+    jQuery('.carousel_page_formation .elementor-widget-container').html('<div class="mon_cat" style="width:100%; height:50vh;background:#48bfda;margin-right:2em"><h2 class="mon_contenu" style=""><marquee behavior="alternate">Cette catégorie sera bientôt disponible !</marquee></h2></div>')
+}
+  });
+
+
+  
+  jQuery(document).ready(function() {
+ var teste = jQuery('.moodle-get-detail li').html() 
+ if(teste.length != 0){
+ consol.log(teste.length)
+ }else{
+ jQuery('.moodle-get-detail li').hide();
+ }
+ });
+ 
+   
+  // alert favoris 
+   jQuery(document).ready(function() {
+ jQuery('#out').click(function(){
+Swal.fire({
+  position: 'top-end',
+  icon: 'warning',
+  text: 'Désolé ! Vous devez connecté pour effectuer cette action ',
+  showConfirmButton: false,
+  timer: 2000
+});
+});
+ });
+ 

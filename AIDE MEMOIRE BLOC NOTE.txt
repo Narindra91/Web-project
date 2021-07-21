@@ -1,0 +1,546 @@
+Récuperer le nombre d'articles dans le panier (Fonction Woocommerce)
+
+WC()->cart->get_cart_contents_count()
+
+##################################################################################
+
+Récuperer le nombre de contenus total dans le panier
+
+WC()->cart->get_cart_total()
+
+###################################################################################
+
+shortcode pour le nombre de panier et icone 
+function cart_badge_fonction($atts)
+{
+	 extract(shortcode_atts(array(
+		'' => '',
+	 ), $atts));
+		  $nbr_panier = WC()->cart->get_cart_contents_count();
+		  
+		$icone ='<i class="fa fa-shopping-cart"></i><sup style="background-color: black; color:white; padding:2px">'.$nbr_panier.'</sup>';		
+	return $icone;
+}	
+
+ 
+
+
+
+add_shortcode('cart_badge_fonction', 'cart_badge_fonction');
+
+####################################################################################
+Dezipper le backup site skiillz et récuperer le fichier 'functions.php'
+
+ unzip skiillz_backup_2021_05_20_08_00_01.zip
+ cd var/www/site_skiillz/
+cp * /var/www/site_skiillz/ 
+cp -r * /var/www/site_skiillz/
+
+ cd var/www/site_skiillz/
+
+ find -type d -exec chmod 755 {} \; && find -type f -exec chmod 644 {} \;
+
+chown -R www-data:www-data site_skiillz/
+
+
+
+
+
+ unzip backup.zip find -type d -exec chmod 755 {} \;
+cd var/www/site_skiillz/wp-content/themes/eduma-child-udemy/
+cp functions.php /var/www/site_skiillz/wp-content/themes/eduma-child-udemy/
+
+
+
+##############################################################################
+
+COMMENT ZIPPER UN DOSSIER 
+Entrer dans le serveur:	
+
+ssh -i skiillz_captown.pem ubuntu@13.244.208.23
+
+Entrer dans le dossier plugins pour compresser le dossier:
+cd /var/www/skiillz/wp-content/plugins
+zip -r contact7.zip contact-form-7  /* commande(zip) -r nom_de_l'archive source(contact-form-7) */
+
+##############################################################################
+RECAPTCHA jQuery /*Code pour le recaptcha somme de 2 nombres dans la page Mon compte*/
+function getRandom(){return Math.ceil(Math.random()* 10);}
+   function createSum()
+   {
+           var rNum1 = getRandom(),
+               rNum2 = getRandom();
+   
+       var total =rNum1 + rNum2; 
+   
+   jQuery("input#captcha-20360").attr("placeholder", rNum1+' + '+ rNum2 +' =' );
+   
+    return total; 
+   } 
+
+   
+var total_1 = createSum();
+
+
+jQuery('.um-form[data-mode=register]').submit(function(event) {
+
+        var entrer_par_user = jQuery("input#captcha-20360").val();
+        if(entrer_par_user.length != 0){
+            
+            
+    
+            if(total_1 == entrer_par_user)
+            {
+                alert('Mande tsara');
+                event.preventDefault();
+                return false;
+                
+            }
+            else
+            {
+                alert('misy diso');
+                event.preventDefault();
+                return false;
+            }
+        
+        
+        
+        
+        }else{
+            alert('mila fenoina');
+          event.preventDefault();
+        }
+ });
+
+#################################################################################
+CODE JQUERY NARINDRA JS PERSONALISES 
+
+	jQuery(document).ready(function() /* Icône barre de recherche dans le menu navbar */
+	{
+   		jQuery('.menu-right ul li.widget:nth-child(3)').css('display','none');
+		jQuery("i.fa.fa-search").click(function() 
+    	{
+      		jQuery('.menu-right ul li.widget:nth-child(3)').css('display','inline-block');
+      		jQuery('li.menu-right ul li:nth-child(4)').attr('style', 'margin: 0px !important');
+      		jQuery('div#ajaxsearchlite2').css('margin','0px');
+      		jQuery('#ajaxsearchlite2 .probox').animate({width: "220px"}, "slow");
+      		jQuery('#ajaxsearchlite2 .probox').css('width','auto');
+      		jQuery("i.fa.fa-search").fadeOut();
+		});
+	
+		 jQuery('#main-content').on('click',function()
+    	{
+         	jQuery('li.menu-right ul li:nth-child(4)').attr('style', 'margin: auto !important');
+    	 	jQuery('.menu-right ul li.widget:nth-child(3)').css('display','none');
+    	 	jQuery('#ajaxsearchlite2 .probox').animate({width: "0px"}, "slow");
+         	jQuery('#ajaxsearchlite2 .probox').css('width','0');
+         	jQuery("i.fa.fa-search").fadeIn();
+    	})
+    });
+	
+   jQuery(document).ready(function() /*Affichage icône des boutons dans le menu navbar*/
+	{
+    	jQuery(".bouton_menu" ).hover(
+    	function() 
+    	{
+    		jQuery(this).find('svg').removeClass('svg_ico').addClass('svg_ico_after');
+   	    },
+   	    function() 
+   	    {
+         	jQuery(this).find('svg').addClass('svg_ico').removeClass('svg_ico_after');
+	    }
+);
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function() { jQuery('.sous_menu_hover').show()},function()
+{ 
+    setTimeout(function(){
+    console.log(jQuery('.sous_menu_hover:hover').length)
+    if(jQuery('.sous_menu_hover:hover').length == 0){
+      
+        jQuery('.sous_menu_hover').hide()
+    }
+},1000)
+})
+jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ jQuery(this).hide()})
+
+
+});
+
+   jQuery( document ).ready(function() /*Captcha somme dans input inscription*/
+	{	
+		function getRandom(){return Math.ceil(Math.random()* 10);} 
+   		function createSum()
+   		{
+           var rNum1 = getRandom(),
+               rNum2 = getRandom();
+   		   var total =rNum1 + rNum2; 
+   		   jQuery("input#captcha-20360").attr("placeholder", rNum1+' + '+ rNum2 +' =' );
+   		   return total; 
+   		} 
+		var total_1 = createSum();
+        
+        jQuery('.um-form[data-mode=register]').submit(function(event) 
+        {
+			var entrer_par_user = jQuery("input#captcha-20360").val();
+        	if(entrer_par_user.length != 0)
+            {
+            		if(total_1 == entrer_par_user)
+            		{
+                		
+                	}
+            		else
+            		{
+                		alert('Erreur de Captcha!');
+                		location.reload();
+                		return false;
+                    }
+       	 	}
+            else
+        	{
+          		alert('Captcha vide !');
+          		location.reload();
+          		return false;
+        	}
+       
+    });
+});
+
+
+##############################################################################################
+
+
+jQuery("a.bouton_menu.Bouton_formation span").attr('style', 'color: #FFF !important');
+            jQuery("a.bouton_menu.Bouton_event span").attr('style','color: #FFF !important');
+            jQuery("a.bouton_menu.Bouton_coworking span").attr('style','color:#FFF !important');
+
+
+##############################################################################################
+REDIRECTION DES UTILISATEURS Mon-compte vers Mon_compte
+function my_logged_in_redirect() {
+     
+    if (!is_user_logged_in() && is_page(814) ) 
+    {
+        wp_redirect( 'https://www.skiillz.com/mon_compte/'); 
+        exit;
+    }
+     
+}
+add_action( 'template_redirect', 'my_logged_in_redirect' );
+
+
+#################################################################################################
+CREER UNE PAGE DE MAINTENANCE DANS LE SITE 
+Elementor > Outils > Mode Maintenance> Choisissez un modèle (créer un modèle si inexistant )
+
+
+#################################################################################################
+
+LISTE DES LOGINS DANS LE NOUVEAU SERVEUR POUR SKIILLZ
+ip => http://13.244.105.168/
+login : skiillz_admin
+mdp : AleVPtQ!sjxs#DgnFw
+
+* admin bdd
+lien : /database_admin
+information bdd => wp-config.php
+
+
+Skiillz – Un site utilisant WordPress
+http://13.244.105.168
+
+##################################################################################################
+CONFIGURATION PHP.ini
+
+cd etc/php/7.2/apache2/ nano php.ini
+
+wp-config.php > @ini_set('upload_max_size', '256 M')
+
+Methode hPanel 
+Log in to hPanel and head to PHP Configuration under advanced. Then switch to the PHP options 
+
+##################################################################################################
+EXPORTER UNE PAGE DEPUIS ELEMENTOR 
+Accèder à Elmentor, sauvé en tant que template
+>Mivadika fichier json 
+>Elementor > My library > import template 
+
+##################################################################################################
+
+COPIER LES PLUGINS DEPUIS UN SERVEUR VERS L'ORDINATEUR 
+Accèder au CMD 
+scp -i wordpress.pem  ubuntu@13.245.5.220:/home/ubuntu/var/www/site_skiillz/wp-content/plugins.zip ./
+
+##################################################################################################
+RESOUDRE PROBLEME IP ALLOWED et ELASTIC IP pour entrée dans le SSH 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:BXcTBcxo0J1uAkUtpxPcMnpLkVJ2U2D7Q5sGWEMq5nU.
+Please contact your system administrator.
+Add correct host key in C:\\Users\\install/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in C:\\Users\\install/.ssh/known_hosts:1
+ECDSA host key for 13.244.208.23 has changed and you have requested strict checking.
+Host key verification failed.
+
+Il faut effacer la liste des IP dans le dossier .ssh/known_hosts
+ssh-keygen -R 13.244.208.23
+
+C:\Users\install\Downloads>ssh-keygen -R 13.244.208.23
+# Host 13.244.208.23 found: line 1
+C:\Users\install/.ssh/known_hosts updated.
+Original contents retained as C:\Users\install/.ssh/known_hosts.old /*La liste des IP aloués est mis à jour alors on peut accèder maintenant au serveur*/
+
+ssh -i skiillz_captown.pem ubuntu@13.244.208.23
+
+######################################################################################################
+CODE JQuery pour chargement affichage des élèments dans la Mozilla firefox 
+
+jQuery(document).ready(function()
+   {
+   		jQuery.uaMatch = function( ua ) {
+        ua = ua.toLowerCase();
+
+        var match = /(chrome)[ /]([w.]+)/.exec( ua ) ||
+                /(webkit)[ /]([w.]+)/.exec( ua ) ||
+                /(opera)(?:.*version|)[ /]([w.]+)/.exec( ua ) ||
+                /(msie) ([w.]+)/.exec( ua ) ||
+                ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([w.]+)|)/.exec( ua ) ||
+                [];
+
+        return {
+                browser: match[ 1 ] || "",
+                version: match[ 2 ] || "0"
+        };
+};
+
+// Don't clobber any existing jQuery.browser in case it's different
+if ( !jQuery.browser ) {
+        matched = jQuery.uaMatch( navigator.userAgent );
+        browser = {};
+
+        if ( matched.browser ) {
+                browser[ matched.browser ] = true;
+                browser.version = matched.version;
+        }
+
+        // Chrome is Webkit, but Webkit is also Safari.
+        if ( browser.chrome ) {
+                browser.webkit = true;
+        } else if ( browser.webkit ) {
+                browser.safari = true;
+        }
+
+        jQuery.browser = browser;
+ 
+}
+
+  if(jQuery.browser.mozilla)
+	{		
+		jQuery('.nos_cours_prefere .elementor-column-wrap.elementor-element-populated').css('height', '38rem');
+	}
+});
+
+############################################################################
+
+J’accepte que les informations saisies         soient utilisées par SKIILLZ pour me contacter. 
+
+############################################################################
+	RECHERCHER UN MOT DANS UN FICHIER
+grep -r eb-my-courses-wrapper /*Rechercher */
+
+############################################################################
+RECONNAITRE A PARTIR DE JQUERY UN NAVIGATEUR 
+
+navigator.saysWho = (() => {
+  const { userAgent } = navigator
+  let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+  let temp
+
+  if (/trident/i.test(match[1])) {
+    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
+
+    return `IE ${temp[1] || ''}`
+  }
+
+  if (match[1] === 'Chrome') {
+    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera')
+    }
+
+    temp = userAgent.match(/\b(Edg)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('Edg', 'Edge (Chromium)')
+    }
+  }
+
+  match = match[2] ? [ match[1], match[2] ] : [ navigator.appName, navigator.appVersion, '-?' ]
+  temp = userAgent.match(/version\/(\d+)/i)
+
+  if (temp !== null) {
+    match.splice(1, 1, temp[1])
+  }
+
+  return match.join(' ')
+})()
+
+//console.log(navigator.saysWho) // outputs: `Chrome 89`
+ browser = navigator.saysWho;
+console.log(browser); 
+if(browser.indexOf('Firefox') >= 0)
+{
+	jQuery('.section_test')css('height', '30rem'); 
+	//jQuery('.nos_cours_prefere .elementor-column-wrap.elementor-element-populated').css('height', '30rem');
+       //jQuery('.bloc-nos-espaces-favoris .elementor-column-wrap.elementor-element-populated').css('height', '38rem');
+			
+}
+
+
+
+jQuery(document).ready(function() 
+{
+    navigator.saysWho = (() => {
+  const { userAgent } = navigator
+  let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+  let temp
+
+  if (/trident/i.test(match[1])) {
+    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
+
+    return `IE ${temp[1] || ''}`
+  }
+
+  if (match[1] === 'Chrome') {
+    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera')
+    }
+
+    temp = userAgent.match(/\b(Edg)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('Edg', 'Edge (Chromium)')
+    }
+  }
+
+  match = match[2] ? [ match[1], match[2] ] : [ navigator.appName, navigator.appVersion, '-?' ]
+  temp = userAgent.match(/version\/(\d+)/i)
+
+  if (temp !== null) {
+    match.splice(1, 1, temp[1])
+  }
+
+  return match.join(' ')
+})()
+
+//console.log(navigator.saysWho) // outputs: `Chrome 89`
+ browser = navigator.saysWho;
+console.log(browser); 
+if(browser.indexOf('Firefox') >= 0)
+{
+	jQuery('.section_test').css('height', '45rem');
+	//jQuery('.nos_cours_prefere .elementor-column-wrap.elementor-element-populated').css('height', '41rem');
+       //jQuery('.bloc-nos-espaces-favoris .elementor-column-wrap.elementor-element-populated').css('height', '38rem');
+			
+}
+else
+{
+    console.log('tsy firefox');
+}
+});
+
+#################################################################################################################
+var smallScreen = window.matchMedia("(max-width: 375px)");
+if (smallScreen.matches)
+{
+    jQuery('.section_button_formation').click(function() {
+        $('.sous_menu_hover').toggleClass('visible');
+    });
+}
+
+################################################################################################################
+CREATION MENU DROPDOWN HOVER 
+
+
+jQuery(document).ready(
+    function () {
+        jQuery("#menu_bouton_navbar .Bouton_formation").hover(function () 
+        {
+        	jQuery('.sous_menu_hover').css('display', 'block')  
+             jQuery('.sous_menu_hover').finish().slideDown('medium');
+          }, 
+          function () {
+             jQuery('.sous_menu_hover').finish().slideUp('medium');
+          }
+    );
+});
+
+################################################################################################################
+CODES JQUERY POUR CREER UN MENU AU SURVOL (HOVER) 
+
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function() { jQuery('.sous_menu_hover').show()},function()
+{ 
+    setTimeout(function(){
+    console.log(jQuery('.sous_menu_hover:hover').length)
+    if(jQuery('.sous_menu_hover:hover').length == 0)
+    {
+      jQuery('.sous_menu_hover').hide()
+    }
+},2000)
+})
+jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ jQuery(this).hide()})
+
+        jQuery("#menu_bouton_navbar .Bouton_formation").hover(function () 
+        {
+        	jQuery('.sous_menu_hover').css('display', 'block')  
+             jQuery('.sous_menu_hover').finish().slideDown('medium');
+          }, 
+          function () 
+          {
+             jQuery('.sous_menu_hover').finish().slideUp('medium');
+          }
+    );
+
+
+});
+
+
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function() { jQuery('.sous_menu_hover').show()},function()
+{ 
+    setTimeout(function(){
+    console.log(jQuery('.sous_menu_hover:hover').length)
+    if(jQuery('.sous_menu_hover:hover').length == 0)
+    {
+      jQuery('.sous_menu_hover').hide()
+    }
+},2000)
+})
+jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ jQuery(this).hide()})
+
+        jQuery("#menu_bouton_navbar .Bouton_formation").hover(function () 
+        {
+        	jQuery('.sous_menu_hover').css('display', 'block')  
+             jQuery('.sous_menu_hover').finish().slideDown('medium');
+          }, 
+          function () 
+          {
+             jQuery('.sous_menu_hover').finish().slideUp('medium');
+          }
+    );
+
+
+##############################################################################################
+
+LOGIN PHPMYADMIN SKIILLZ 
+
+url : https://www.skiillz.com/phpad/
+
+user : admin 
+mot de passe: Wuz94487
