@@ -1,0 +1,20 @@
+MODIFIER MOT DE PASSE DE MYSQL :
+    - Accèder à mysql :
+        sudo mysql
+    - Afficher les variables mot de passe :
+        SHOW VARIABLES LIKE '%pass%';
+    - Afficher les variables contenant 'validate_password'
+        SHOW VARIABLES LIKE '%validate_password%';
+    - Desactiver le check par nom d'utilisateur :
+        SET GLOBAL validate_password.check_user_name=OFF;
+    - Configurer le nombre de caractères à 4 :
+        SET GLOBAL validate_password.length=4;
+    - Mettre le 'case_count' à 0 :
+        SET GLOBAL validate_password.mixed_case_count=0;
+        SET GLOBAL validate_password.number_count=0;
+        SET GLOBAL validate_password.policy=LOW;
+        SET GLOBAL validate_password.special_char_count=0;
+    - Changer le mot de passe par le mot 'root' :
+        alter user 'root'@'localhost' identified with mysql_native_password by 'root';
+
+CREATION DE Vhost sous ubuntu 
