@@ -605,4 +605,26 @@ LES ESSENTIELS DES COMMANDES GIT
           - git config --global user.email nom_email@gmail.com
     
     GIT INIT 
-    
+     - Créer un nouveau dépôt git
+        git init 
+
+#######################################################################################
+CREATION D'UN THEME ENFANT DANS WORDPRESS 
+    - Créer le dossier du thème dans wp-content/themes/nom_du_dossier_theme_du_theme_parent-child
+    - Créer un fichier "style.css" à l'intérieur du dossier
+        
+        + Contenu du fichier style.css :
+            /*
+                Theme Name: Soft Business child
+                Theme URI: http://creativthemes.com/downloads/soft-business/
+                Author: Creativ Themes
+                Author URI: http://creativthemes.com/
+                Description: Thème enfant Soft business.
+                Version: 1.0
+                Requires at least: 5.1
+                Requires PHP: 5.6
+                Tested up to: 5.9
+                License: GNU General Public License v2 or later
+                License URI: http://www.gnu.org/licenses/gpl-2.0.html
+                Text Domain: soft-business
+            */
