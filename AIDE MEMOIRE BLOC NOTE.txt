@@ -537,10 +537,72 @@ jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ j
 
 
 ##############################################################################################
+MODIFIER MOT DE PASSE DE MYSQL :
+    - Accèder à mysql :
+        sudo mysql
+    - Afficher les variables mot de passe :
+        SHOW VARIABLES LIKE '%pass%';
+    - Afficher les variables contenant 'validate_password'
+        SHOW VARIABLES LIKE '%validate_password%';
+    - Desactiver le check par nom d'utilisateur :
+        SET GLOBAL validate_password.check_user_name=OFF;
+    - Configurer le nombre de caractères à 4 :
+        SET GLOBAL validate_password.length=4;
+    - Mettre le 'case_count' à 0 :
+        SET GLOBAL validate_password.mixed_case_count=0;
+        SET GLOBAL validate_password.number_count=0;
+        SET GLOBAL validate_password.policy=LOW;
+        SET GLOBAL validate_password.special_char_count=0;
+    - Changer le mot de passe par le mot 'root' :
+        alter user 'root'@'localhost' identified with mysql_native_password by 'root';
 
-LOGIN PHPMYADMIN SKIILLZ 
+#####################################################################################
+CREATION DE Vhost sous ubuntu 
+        - Créer le dossier dans /var/www/html/nom_du_dossier 
+            sudo mkdir /var/www/monsite.fr
+        - Renseigner le nom du site dans DNS (liste des hosts)
+            sudo nano /etc/hosts
+        - Creer ou copier le fichier de configuration 
+            // Copier un fichier déjà existant 
+                sudo cp reqins-pro.conf mrstock.conf
+            //Créer un nouveau fichier 
+                sudo nano /etc/apache2/sites-available/mrstock.conf
+        - Activer le site 
+                sudo a2ensite mrstock.conf
+    
+####################################################################################
+IMPORTER ET EXPORTER BASE DE DONNEES 
+  Importer une base de donnée 
+    mysql -u nom_utilisateur_sql -p  nom_de_la_base < nom_de_la_base_à_exporter.sql
 
-url : https://www.skiillz.com/phpad/
+  Exporter une base de donnée
+    
 
-user : admin 
-mot de passe: Wuz94487
+####################################################################################
+Changer mot de passe d'un compte admin dans Prestashop 
+    - Accèder base de donnée du projet 
+    - Afficher les données dans la table ps_employee 
+    - Accèder au repertoire app > config 
+    - Ouvrir le fichier parameters.php 
+    - Copier la valeur de 'cookie_key'
+    - Copier la valeur de 'cookie_key' dans la colonne 'passwd' 
+    - taper le nouveau mot de passe après les valeurs et enregistrer 
+
+#####################################################################################
+CREATION VHOST SOUS LINUX
+  - Créer dossier dans /var/www/html/ecolomique
+  - Configurer le nom du site dans le DNS 
+      sudo nano /etc/hosts
+  - Activer le site 
+    sudo a2ensite ecolomique.loc.conf
+  - Recharger le service apache2
+    systemctl reload apache2
+  
+####################################################################################
+LES ESSENTIELS DES COMMANDES GIT 
+    GIT CONFIG :
+      Configurer les préférences de l'utilisateur : nom utilisateur et format de fichier
+          - git config --global user.email nom_email@gmail.com
+    
+    GIT INIT 
+    
