@@ -573,10 +573,10 @@ CREATION DE Vhost sous ubuntu
 ####################################################################################
 IMPORTER ET EXPORTER BASE DE DONNEES 
   Importer une base de donnée 
-    mysql -u nom_utilisateur_sql -p  nom_de_la_base < nom_de_la_base_à_exporter.sql
+    mysql -u nom_utilisateur_sql -p  nom_de_la_base < nom_de_la_base_à_importer.sql
 
   Exporter une base de donnée
-    
+     mysqldump -u nom_utilisateur_sql -p  nom_de_la_base > nom_de_la_base_à_exporter.sql
 
 ####################################################################################
 Changer mot de passe d'un compte admin dans Prestashop 
@@ -602,11 +602,36 @@ CREATION VHOST SOUS LINUX
 LES ESSENTIELS DES COMMANDES GIT 
     GIT CONFIG :
       Configurer les préférences de l'utilisateur : nom utilisateur et format de fichier
-          - git config --global user.email nom_email@gmail.com
+          + git config --global user.email nom_email@gmail.com
     
     GIT INIT 
      - Créer un nouveau dépôt git
-        git init 
+          + git init 
+    
+    GIT ADD 
+      - Permet d'ajouter un fichier dans le dépôt 
+          + git add nom_du_fichier_a_ajouter.txt 
+  
+    GIT CLONE 
+      - Permet de copier un dépôt distant vers le repertoire local 
+         + git clone https://chemin_du_depot_distant
+      - Permet de vérifier si le dépôt se trouve sur un serveur distant 
+         + git clone alex@93.188.160.58:/chemin/vers/dépôt
+     
+    GIT COMMIT 
+      - Permet de valider les modifications apportés et d'ajouter des commentaires concernant les modifications
+         + git commit –m'Description du commit'
+
+    GIT STATUS
+      - Affiche la liste des fichiers modifiés ainsi que les fichiers qui doivent encore être ajoutés ou validés 
+         + git status
+    
+    GIT PULL 
+      - Télécharger les modifications dans le serveur distant vers le dépôt local 
+         + git pull 
+
+    GIT PUSH 
+      - 
 
 #######################################################################################
 CREATION D'UN THEME ENFANT DANS WORDPRESS 
@@ -628,3 +653,179 @@ CREATION D'UN THEME ENFANT DANS WORDPRESS
                 License URI: http://www.gnu.org/licenses/gpl-2.0.html
                 Text Domain: soft-business
             */
+     - Créer le fichier index.php
+     - Créer le fichier "functions.php"
+     
+     - Contenu du fichier functions.php
+          <?php
+            /* enqueue script for parent theme stylesheeet */        
+              function childtheme_parent_styles() 
+              {
+                // enqueue style
+                wp_enqueue_style( 'parent', get_template_directory_uri().'/style.css' );                       
+              }
+              add_action( 'wp_enqueue_scripts', 'childtheme_parent_styles');
+     
+     - Activer le thème enfant
+        Apparence > Themes 
+
+########################################################################        
+CREER UNE TABLE DANS LA BASE DE DONNEES WORDPRESS 
+    function jal_install () {
+   global $wpdb;
+
+   $table_name = $wpdb->prefix . "liveshoutbox"; 
+}
+
+################################################################################
+CREER UNE CHAINE AVEC TRADUCTION DANS WORDPRESS
+
+   __('LE TEXTE TRADUIT','LE NOM DU FICHIER DE TRADUCTION')
+
+#################################################################################
+SYNTAXE DE BASE jQuery dans Wordpress
+
+jQuery(function ($) {
+    $(#nav).show();
+});
+
+##################################################################################ù
+- Créer la fonction
+function mya_mvola_load_textdomain() {
+    load_plugin_textdomain( 'mya_mvola', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+- Joindre le callback
+ add_action( 'plugins_loaded', 'mya_mvola_load_textdomain' );
+
+############################################################################
+
+CREER UN SHORTCODE POUR AFFICHER LE NOM, LA DESCRIPTION COURTE ET LONGUE D'UN PRODUIT DANS LA PAGE COMMANDE 
+
+function description_Produits($atts)
+{
+	 extract(shortcode_atts(array(
+		'' => '',
+	 ), $atts));
+     
+     $product_id = array();
+     
+     global $woocommerce;
+     
+     $items = $woocommerce->cart->get_cart();
+     $product_names = array();
+     
+     echo '<h4>Votre commande comprend :</h4>';
+     
+     foreach($items as $item => $values) 
+     { 
+      $_product = $values['data']->post; 
+      $product_names[]=$_product->post_title; 
+      $short_description[] = $_product->post_excerpt;
+      $long_description[] = $_product->post_content;
+      //var_dump($long);
+     }
+    
+     foreach($product_names as $noms) 
+     {
+        echo '<pre>'.$noms;
+        echo '</pre>';
+     }
+
+     foreach($short_description as $short) 
+     {
+       echo '</pre>'.$short;
+        
+     }
+     foreach($long_description as $long) 
+     {
+       echo '</pre>'.$long;
+        
+     }
+}	
+
+add_shortcode('description_Produits', 'description_Produits');
+
+#####################################################################
+
+RECUPERER L'ID D'UN PRODUIT DANS PRESTASHOP 1.6
+  $id_product  = (int)Tools::getValue('id_product');
+
+########################################################################
+
+OVERRIDE DE TEMPLATES DU PLUGIN WOOCOMMERCE DANS WORDPRESS
+
+ - Copier le fichier /wp-content/plugins/woocommerce/templates/checkout/payment-method.php
+
+ - Coller dans le repertoire du thème ou thème enfant en créant le dossier woocommerce et enlever le repertoire "templates" 
+ 
+ /wp-content/themes/nom_du_thème/woocommerce/checkout/payment-method.php
+
+ ########################################################################
+  
+  RECUPERER L'URL DANS UNE PAGE PHP DANS PRESTASHOP 
+
+  $CurrentUrl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+#########################################################################
+FAIRE UN VAR DUMP D'UNE VARIABLE SMARTY DANS UN TEMPLATE .tpl DANS PRESTASHOP 
+
+{$var|@var_dump}
+
+
+#########################################################################
+CHANGER MOT DE PASSE COMPTE ADMIN AVEC COOKIES KEY 
+    - Accèder à la base de données du projet
+    - Accèder à la table ps_employee
+    - Choisir un compte admin dans la liste
+    - Accèder au fichier app/config/parameters.php
+    - Copier la valeur de 'cookie_key'
+    - Modifier la colonne 'passwd' et coller la valeur de 'cookie_key' suivi du nouveau mot de passe 
+    - cliquer sur le menu déroulant et selectionner 'md5'
+
+##########################################################################
+AJOUTER FICHIER JAVASCRIPT ET JQUERY EXTERNES DANS PRESTASHOP 
+  - Accèder au fichier override/classes/controller/ FrontController.php
+  - 
+
+###########################################################################
+ECRIRE DU CODE JAVASCRIPT DANS UN TEMPLATE PRESTASHOP 
+  <script type="text/javascript">
+    {literal}
+        //Contenu du code javascript
+        const button = document.getElementsByClassName('caret');
+    {/literal}
+</script>
+
+###########################################################################
+VERIFICATION TEMPLATE DANS UN MODULE DANS PRESTASHOP 1.7
+  - Pour modifier un template, il faut vérifier les surcharges(override)
+  - Les surcharges de templates sont dans le répertoire /thème/modules/nom_du_module
+
+
+
+############################################################################
+
+UTILISATION DU AP PAGE BUILDER AP HOOK BUILDER PRESTASHOP 
+  Ap profiles Manage : Modification du homepage
+  Ap Product Details Builder : Modification de la page produit
+
+############################################################################
+ACTIVATION ET DESACTIVATION DE LA VERSION DE PHP
+    - Créer un fichier phpinfo.php dans la racine du projet 
+      + Contenu du fichier phpinfo.php : 
+            <?php
+              // Affiche toutes les informations, comme le ferait INFO_ALL
+              phpinfo();
+
+    - Accèder via URL le fichier http://www.mlv.loc/phpinfo.php
+    
+    ACTIVATION D'UNE VERSION DE PHP :
+        sudo a2enmod php7.4
+      + Redémarrer les services apache 
+        sudo service apache2 restart 
+    
+    DESACTIVATION D'UNE VERSION DE PHP :
+        sudo a2dismod php7.1
+        + Redémarrer les services apache 
+        sudo service apache2 restart 
