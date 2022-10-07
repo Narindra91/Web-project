@@ -631,7 +631,7 @@ LES ESSENTIELS DES COMMANDES GIT
          + git pull 
 
     GIT PUSH 
-      - 
+      - Envoyer les modifications dans la version distante
 
 #######################################################################################
 CREATION D'UN THEME ENFANT DANS WORDPRESS 
@@ -789,6 +789,55 @@ AJOUTER FICHIER JAVASCRIPT ET JQUERY EXTERNES DANS PRESTASHOP
   - 
 
 ###########################################################################
+OVERRIDE DANS PRESTASHOP 
+    OVERRIDE DE MODULES DANS PRESTASHOP
+     
+      + Override classe principale d'un module  
+        - Créer un fichier en respectant l'arborescence du repertoire du fichier 
+            fichier original : /modules/<nom_du_module>/nom_classe_principale
+            fichier override : /override/modules/<nom_du_module>/nom_classe_principale
+
+        - Ajouter suffixe "Override" et extends sur le nom de la classe 
+                  "Labproductcategory" => "LabproductcategoryOverride" et 
+                  extends "Module" => "Labproductcategory"    
+        Fichier original : class Labproductcategory extends Module {
+
+        }
+
+        Fichier Override : class LabproductcategoryOverride extends Labproductcategory {
+
+        }
+      
+     + Override Controller 
+        - Respecter l'arborescence des fichiers 
+         fichier original : /controllers/front/ProductController.php 
+         fichier override : /override/controllers/front/ProductController.php
+
+        -Enlever le suffixe "Core" sur le nom de la classe 
+          ProductControllerCore => ProductController
+          et extends ProductPresentingFrontControllerCore => ProductControllerCore
+        
+        Fichier original : 
+        
+        class ProductControllerCore extends ProductPresentingFrontControllerCore
+        {
+
+        }
+
+        Fichier override :
+
+        class ProductController extends ProductControllerCore 
+        {
+
+        } 
+        
+       + Override de template front 
+          - Les templates dans le front peuvent être overridé 
+          - Pour les templates front modules : accèder au thème activé /themes/<nom_du_theme_actif>/<nom_du_module>/<nom_du_template.tpl>
+        
+          - Pour les autres templates, vérifier dans le dossier /themes/<nom_du_theme_actif>/templates/ 
+
+###########################################################################
 ECRIRE DU CODE JAVASCRIPT DANS UN TEMPLATE PRESTASHOP 
   <script type="text/javascript">
     {literal}
@@ -829,3 +878,62 @@ ACTIVATION ET DESACTIVATION DE LA VERSION DE PHP
         sudo a2dismod php7.1
         + Redémarrer les services apache 
         sudo service apache2 restart 
+
+############################################################################
+RECUPERER ID DE LA CATEGORIE COURANTE DANS UN TEMPLATE AVEC SMARTY DANS PRESTASHOP 
+
+{assign var='cats' value=Product::getProductCategories($product.id)}
+{$cats|@var_dump}
+
+##############################################################################
+APPEL DE FICHIER CSS DANS UN THEME WORDPRESS 
+  - Ouvrir le fichier functions.php du thème actif 
+  - /**
+ * Enqueue styles
+ */
+function child_enqueue_styles()
+{
+
+    wp_enqueue_style('astra-child-theme-css', get_stylesheet_directory_uri() . '/fusion-011221-04.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all');
+    /* Appel fichier css */
+
+
+    wp_enqueue_style('theme-child-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all');
+
+    wp_enqueue_style('tableau-theme-css', get_stylesheet_directory_uri() . '/css/tableau-v4.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all');
+    wp_enqueue_script('custom-script.js', get_stylesheet_directory_uri() . '/js/simplebar.min.js', array('jquery'));
+
+}
+
+###########################################################################################
+CREER UN COMPTE DANS WOOCOMMERCE BRAINTREE PAYPAL SANDBOX 
+  - Se connecter dans le site de Braintree 
+      + site : https://www.braintreepayments.com/sandbox
+  
+  - Remplir les champs dans "Sign up for the sandbox"
+  - Consulter le lien dans le compte email correspondant (cf : se souvenir du champ Where is your Business is Located? "United States")
+  - Cliquer sur le lien dans le mail et remplir les champs
+  - On accède à la fenêtre contenant "Sandbox Keys & Configuration"
+    + Copier les valeurs de Merchant ID, Public Key et Private key dans l'onglet Woocommerce > Réglages > Paiements 
+  
+  - Créer un compte Paypal avec le champ "Pays" même que pour le compte Braintree sandbox (cf : se souvenir du champ Where is your Business is Located? "United States") 
+      + Selectionner un compte en tant que "Business"
+  
+  - Cliquer sur le bouton "Create app" 
+  - Ouvrir l'onglet paramètres dans la fenêtre Braintree https://sandbox.braintreegateway.com/merchants/cccshfxjwzbjr3rh/home (ilay icone bilao kely) > Processing 
+
+  - Selectionner le bouton "link sandbox" et copier les valeurs dans app crée dans Paypal 
+  - Dans l'onglet Paypal > Cliquer sur le bouton "Add webhook" et cocher tous les options
+  - Coller chacunes des valeurs correspondantes : 
+  Sandbox account, Client ID
+
+    Réference : https://developer.paypal.com/braintree/docs/guides/paypal/testing-go-live/php#linked-paypal-testing
+
+###########################################################################
+
+OBTENIR MONTANT CART PANIER  PRESTASHOP 1.7
+  
+  PHP :
+      $this->context->cart->getOrderTotal(true, Cart::BOTH);
+  SMARTY :
+      {$cart.totals.total.amount}
