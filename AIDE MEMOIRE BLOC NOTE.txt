@@ -937,3 +937,9 @@ OBTENIR MONTANT CART PANIER  PRESTASHOP 1.7
       $this->context->cart->getOrderTotal(true, Cart::BOTH);
   SMARTY :
       {$cart.totals.total.amount}
+      
+###########################################################################
+LOGIN ET MDP Github 
+
+username : Narindra91
+mot de passe : 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
