@@ -658,16 +658,63 @@ CREATION D'UN THEME ENFANT DANS WORDPRESS
      
      - Contenu du fichier functions.php
           <?php
-            /* enqueue script for parent theme stylesheeet */        
-              function childtheme_parent_styles() 
-              {
-                // enqueue style
-                wp_enqueue_style( 'parent', get_template_directory_uri().'/style.css' );                       
-              }
-              add_action( 'wp_enqueue_scripts', 'childtheme_parent_styles');
+          /* Chargement des styles du parent. */
+        add_action( 'wp_enqueue_scripts', 'wpchild_enqueue_styles' );
+        function wpchild_enqueue_styles()
+        {
+          wp_enqueue_style( 'wpm-astra-style', get_template_directory_uri() . '/style.css' );
+        }
      
      - Activer le thème enfant
         Apparence > Themes 
+########################################################################
+CREATION DE CPT ou Custom Post Type dans WORDPRESS
+- Accèder au fichier functions.php dans le thème enfant 
+- function my_cpt()
+{
+	// On rentre les différentes dénominations de notre custom post type qui seront affichées dans l'administration
+	$labels = array(
+		// Le nom au pluriel
+		'name'                => _x( 'Batiments', 'Post Type General Name'),
+		// Le nom au singulier
+		'singular_name'       => _x( 'Batiment', 'Post Type Singular Name'),
+		// Le libellé affiché dans le menu
+		'menu_name'           => __( 'Batiments'),
+		// Les différents libellés de l'administration
+		'all_items'           => __( 'Toutes les batiments'),
+		'view_item'           => __( 'Voir les batiments'),
+		'add_new_item'        => __( 'Ajouter une nouveau batiment'),
+		'add_new'             => __( 'Ajouter'),
+		'edit_item'           => __( 'Editer le batiment'),
+		'update_item'         => __( 'Modifier le batiment'),
+		'search_items'        => __( 'Rechercher un batiment'),
+		'not_found'           => __( 'Non trouvée'),
+		'not_found_in_trash'  => __( 'Non trouvée dans la corbeille'),
+	);
+
+	// On peut définir ici d'autres options pour notre custom post type
+	
+	$args = array(
+		'label'               => __( 'Batiments'),
+		'description'         => __( 'Tous sur batiments'),
+		'labels'              => $labels,
+		// On définit les options disponibles dans l'éditeur de notre custom post type ( un titre, un auteur...)
+		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+		/* 
+		* Différentes options supplémentaires
+		*/
+		'show_in_rest' => true,
+		'hierarchical'        => true,
+		'public'              => true,
+		'has_archive'         => true,
+		'rewrite'			  => array( 'slug' => 'batiments'),
+
+	);
+
+	// On enregistre notre custom post type qu'on nomme ici "serietv" et ses arguments
+	register_post_type( 'batiments', $args );
+}
+add_action( 'init', 'my_cpt', 0 );
 
 ########################################################################        
 CREER UNE TABLE DANS LA BASE DE DONNEES WORDPRESS 
@@ -943,3 +990,46 @@ LOGIN ET MDP Github
 
 username : Narindra91
 mot de passe : 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
+
+###########################################################################
+IMPORTATION ET EXPORTATION DE BASE DE DONNEES DANS PRESTASHOP 1.7
+  *EXPORTATION
+    
+    + Télécharger la base de données dans l'ordinateur 
+      Methode 1 : PHPMyadmin 
+          - Sélectionner la base de donnée > Exporter 
+      Methode 2 : Adminer
+          - Télécharger le fichier adminer.php 
+          - Mettre le fichier adminer.php dans la racine du projet 
+          - Taper dans l'URL : url_du_site/adminer.php
+          - Accèder à l'onglet exporter (format sql ou zip)
+      Methode 3 : Ligne de commande 
+          - Accèder au terminal > répertoire du projet 
+          - mysql -u nom_utilisateur_sql -p  nom_de_la_base > nom_de_la_base_à_importer.sql
+  
+  *IMPORTATION 
+    +  Methode 1 : PHPMyadmin
+          - Sélectionner la base de donnée > Importer 
+    + Methode 2 : Adminer 
+          - Télécharger le fichier adminer.php 
+          - Mettre le fichier adminer.php dans la racine du projet 
+          - Taper dans l'URL : url_du_site/adminer.php
+          - Accèder à l'onglet importer (format sql ou zip)
+
+    * Changement des tables dans la base de données 
+          - Accèder à la table "ps_configuration"
+          - Chercher dans la colonne "name" LIKE %..% valeur = SSL 
+          - Changer la valeur de la colonne "name PS_SSL_ENABLED" value "1" à 0
+          - Changer la valeur de la colonne "name PS_SSL_ENABLED_EVERYWHERE" value "1" à 0
+          - Changer la valeur de la colonne "name PS_SHOP_DOMAIN_SSL" "Url correspondante"
+
+##########################################################################################
+RECUPERATION D'UN COMPTE DANS WORDPRESS 
+    + Accèder au PHPMyadmin correspondant au projet 
+    + Accèder au nom de la base de données configurés pour le projet 
+    + Accèder à la table "wp_users" :
+        - Supprimer la valeur dans mot de passe 
+        - Génerer un mot de passe MD5 hash encrypt
+        - Coller le nouveau mot de passé hashé dans la colonne mot de passe 
+
+  
