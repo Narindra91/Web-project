@@ -1032,4 +1032,5 @@ RECUPERATION D'UN COMPTE DANS WORDPRESS
         - Génerer un mot de passe MD5 hash encrypt
         - Coller le nouveau mot de passé hashé dans la colonne mot de passe 
 
-  
+#########################################################################################
+CREER UN PLUGIN WORDPRESS
