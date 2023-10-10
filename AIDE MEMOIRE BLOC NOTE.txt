@@ -573,7 +573,7 @@ CREATION DE Vhost sous ubuntu
 ####################################################################################
 IMPORTER ET EXPORTER BASE DE DONNEES 
   Importer une base de donnée 
-    mysql -u nom_utilisateur_sql -p  nom_de_la_base < nom_de_la_base_à_importer.sql
+      mysql -u nom_utilisateur_sql -p  nom_de_la_base < nom_de_la_base_à_importer.sql
 
   Exporter une base de donnée
      mysqldump -u nom_utilisateur_sql -p  nom_de_la_base > nom_de_la_base_à_exporter.sql
@@ -1032,9 +1032,5 @@ RECUPERATION D'UN COMPTE DANS WORDPRESS
         - Génerer un mot de passe MD5 hash encrypt
         - Coller le nouveau mot de passé hashé dans la colonne mot de passe 
 
-<<<<<<< HEAD
-#########################################################################################
-CREER UN PLUGIN WORDPRESS
-=======
-  
->>>>>>> bee7f2cb8b8af59085a3131ea5d3afbd4143fba1
+############################################################################################
+CREER UN PLUGIN DANS PRESTASHOP 1.7
