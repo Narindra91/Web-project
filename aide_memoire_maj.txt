@@ -1,0 +1,1036 @@
+Récuperer le nombre d'articles dans le panier (Fonction Woocommerce)
+
+WC()->cart->get_cart_contents_count()
+
+##################################################################################
+
+Récuperer le nombre de contenus total dans le panier
+
+WC()->cart->get_cart_total()
+
+###################################################################################
+
+shortcode pour le nombre de panier et icone 
+function cart_badge_fonction($atts)
+{
+	 extract(shortcode_atts(array(
+		'' => '',
+	 ), $atts));
+		  $nbr_panier = WC()->cart->get_cart_contents_count();
+		  
+		$icone ='<i class="fa fa-shopping-cart"></i><sup style="background-color: black; color:white; padding:2px">'.$nbr_panier.'</sup>';		
+	return $icone;
+}	
+
+ 
+
+
+
+add_shortcode('cart_badge_fonction', 'cart_badge_fonction');
+
+####################################################################################
+Dezipper le backup site skiillz et récuperer le fichier 'functions.php'
+
+ unzip skiillz_backup_2021_05_20_08_00_01.zip
+ cd var/www/site_skiillz/
+cp * /var/www/site_skiillz/ 
+cp -r * /var/www/site_skiillz/
+
+ cd var/www/site_skiillz/
+
+ find -type d -exec chmod 755 {} \; && find -type f -exec chmod 644 {} \;
+
+chown -R www-data:www-data site_skiillz/
+
+
+
+
+
+ unzip backup.zip find -type d -exec chmod 755 {} \;
+cd var/www/site_skiillz/wp-content/themes/eduma-child-udemy/
+cp functions.php /var/www/site_skiillz/wp-content/themes/eduma-child-udemy/
+
+
+
+##############################################################################
+
+COMMENT ZIPPER UN DOSSIER 
+Entrer dans le serveur:	
+
+ssh -i skiillz_captown.pem ubuntu@13.244.208.23
+
+Entrer dans le dossier plugins pour compresser le dossier:
+cd /var/www/skiillz/wp-content/plugins
+zip -r contact7.zip contact-form-7  /* commande(zip) -r nom_de_l'archive source(contact-form-7) */
+
+##############################################################################
+RECAPTCHA jQuery /*Code pour le recaptcha somme de 2 nombres dans la page Mon compte*/
+function getRandom(){return Math.ceil(Math.random()* 10);}
+   function createSum()
+   {
+           var rNum1 = getRandom(),
+               rNum2 = getRandom();
+   
+       var total =rNum1 + rNum2; 
+   
+   jQuery("input#captcha-20360").attr("placeholder", rNum1+' + '+ rNum2 +' =' );
+   
+    return total; 
+   } 
+
+   
+var total_1 = createSum();
+
+
+jQuery('.um-form[data-mode=register]').submit(function(event) {
+
+        var entrer_par_user = jQuery("input#captcha-20360").val();
+        if(entrer_par_user.length != 0){
+            
+            
+    
+            if(total_1 == entrer_par_user)
+            {
+                alert('Mande tsara');
+                event.preventDefault();
+                return false;
+                
+            }
+            else
+            {
+                alert('misy diso');
+                event.preventDefault();
+                return false;
+            }
+        
+        
+        
+        
+        }else{
+            alert('mila fenoina');
+          event.preventDefault();
+        }
+ });
+
+#################################################################################
+CODE JQUERY NARINDRA JS PERSONALISES 
+
+	jQuery(document).ready(function() /* Icône barre de recherche dans le menu navbar */
+	{
+   		jQuery('.menu-right ul li.widget:nth-child(3)').css('display','none');
+		jQuery("i.fa.fa-search").click(function() 
+    	{
+      		jQuery('.menu-right ul li.widget:nth-child(3)').css('display','inline-block');
+      		jQuery('li.menu-right ul li:nth-child(4)').attr('style', 'margin: 0px !important');
+      		jQuery('div#ajaxsearchlite2').css('margin','0px');
+      		jQuery('#ajaxsearchlite2 .probox').animate({width: "220px"}, "slow");
+      		jQuery('#ajaxsearchlite2 .probox').css('width','auto');
+      		jQuery("i.fa.fa-search").fadeOut();
+		});
+	
+		 jQuery('#main-content').on('click',function()
+    	{
+         	jQuery('li.menu-right ul li:nth-child(4)').attr('style', 'margin: auto !important');
+    	 	jQuery('.menu-right ul li.widget:nth-child(3)').css('display','none');
+    	 	jQuery('#ajaxsearchlite2 .probox').animate({width: "0px"}, "slow");
+         	jQuery('#ajaxsearchlite2 .probox').css('width','0');
+         	jQuery("i.fa.fa-search").fadeIn();
+    	})
+    });
+	
+   jQuery(document).ready(function() /*Affichage icône des boutons dans le menu navbar*/
+	{
+    	jQuery(".bouton_menu" ).hover(
+    	function() 
+    	{
+    		jQuery(this).find('svg').removeClass('svg_ico').addClass('svg_ico_after');
+   	    },
+   	    function() 
+   	    {
+         	jQuery(this).find('svg').addClass('svg_ico').removeClass('svg_ico_after');
+	    }
+);
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function() { jQuery('.sous_menu_hover').show()},function()
+{ 
+    setTimeout(function(){
+    console.log(jQuery('.sous_menu_hover:hover').length)
+    if(jQuery('.sous_menu_hover:hover').length == 0){
+      
+        jQuery('.sous_menu_hover').hide()
+    }
+},1000)
+})
+jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ jQuery(this).hide()})
+
+
+});
+
+   jQuery( document ).ready(function() /*Captcha somme dans input inscription*/
+	{	
+		function getRandom(){return Math.ceil(Math.random()* 10);} 
+   		function createSum()
+   		{
+           var rNum1 = getRandom(),
+               rNum2 = getRandom();
+   		   var total =rNum1 + rNum2; 
+   		   jQuery("input#captcha-20360").attr("placeholder", rNum1+' + '+ rNum2 +' =' );
+   		   return total; 
+   		} 
+		var total_1 = createSum();
+        
+        jQuery('.um-form[data-mode=register]').submit(function(event) 
+        {
+			var entrer_par_user = jQuery("input#captcha-20360").val();
+        	if(entrer_par_user.length != 0)
+            {
+            		if(total_1 == entrer_par_user)
+            		{
+                		
+                	}
+            		else
+            		{
+                		alert('Erreur de Captcha!');
+                		location.reload();
+                		return false;
+                    }
+       	 	}
+            else
+        	{
+          		alert('Captcha vide !');
+          		location.reload();
+          		return false;
+        	}
+       
+    });
+});
+
+
+##############################################################################################
+
+
+jQuery("a.bouton_menu.Bouton_formation span").attr('style', 'color: #FFF !important');
+            jQuery("a.bouton_menu.Bouton_event span").attr('style','color: #FFF !important');
+            jQuery("a.bouton_menu.Bouton_coworking span").attr('style','color:#FFF !important');
+
+
+##############################################################################################
+REDIRECTION DES UTILISATEURS Mon-compte vers Mon_compte
+function my_logged_in_redirect() {
+     
+    if (!is_user_logged_in() && is_page(814) ) 
+    {
+        wp_redirect( 'https://www.skiillz.com/mon_compte/'); 
+        exit;
+    }
+     
+}
+add_action( 'template_redirect', 'my_logged_in_redirect' );
+
+
+#################################################################################################
+CREER UNE PAGE DE MAINTENANCE DANS LE SITE 
+Elementor > Outils > Mode Maintenance> Choisissez un modèle (créer un modèle si inexistant )
+
+
+#################################################################################################
+
+LISTE DES LOGINS DANS LE NOUVEAU SERVEUR POUR SKIILLZ
+ip => http://13.244.105.168/
+login : skiillz_admin
+mdp : AleVPtQ!sjxs#DgnFw
+
+* admin bdd
+lien : /database_admin
+information bdd => wp-config.php
+
+
+Skiillz – Un site utilisant WordPress
+http://13.244.105.168
+
+##################################################################################################
+CONFIGURATION PHP.ini
+
+cd etc/php/7.2/apache2/ nano php.ini
+
+wp-config.php > @ini_set('upload_max_size', '256 M')
+
+Methode hPanel 
+Log in to hPanel and head to PHP Configuration under advanced. Then switch to the PHP options 
+
+##################################################################################################
+EXPORTER UNE PAGE DEPUIS ELEMENTOR 
+Accèder à Elmentor, sauvé en tant que template
+>Mivadika fichier json 
+>Elementor > My library > import template 
+
+##################################################################################################
+
+COPIER LES PLUGINS DEPUIS UN SERVEUR VERS L'ORDINATEUR 
+Accèder au CMD 
+scp -i wordpress.pem  ubuntu@13.245.5.220:/home/ubuntu/var/www/site_skiillz/wp-content/plugins.zip ./
+
+##################################################################################################
+RESOUDRE PROBLEME IP ALLOWED et ELASTIC IP pour entrée dans le SSH 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:BXcTBcxo0J1uAkUtpxPcMnpLkVJ2U2D7Q5sGWEMq5nU.
+Please contact your system administrator.
+Add correct host key in C:\\Users\\install/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in C:\\Users\\install/.ssh/known_hosts:1
+ECDSA host key for 13.244.208.23 has changed and you have requested strict checking.
+Host key verification failed.
+
+Il faut effacer la liste des IP dans le dossier .ssh/known_hosts
+ssh-keygen -R 13.244.208.23
+
+C:\Users\install\Downloads>ssh-keygen -R 13.244.208.23
+# Host 13.244.208.23 found: line 1
+C:\Users\install/.ssh/known_hosts updated.
+Original contents retained as C:\Users\install/.ssh/known_hosts.old /*La liste des IP aloués est mis à jour alors on peut accèder maintenant au serveur*/
+
+ssh -i skiillz_captown.pem ubuntu@13.244.208.23
+
+######################################################################################################
+CODE JQuery pour chargement affichage des élèments dans la Mozilla firefox 
+
+jQuery(document).ready(function()
+   {
+   		jQuery.uaMatch = function( ua ) {
+        ua = ua.toLowerCase();
+
+        var match = /(chrome)[ /]([w.]+)/.exec( ua ) ||
+                /(webkit)[ /]([w.]+)/.exec( ua ) ||
+                /(opera)(?:.*version|)[ /]([w.]+)/.exec( ua ) ||
+                /(msie) ([w.]+)/.exec( ua ) ||
+                ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([w.]+)|)/.exec( ua ) ||
+                [];
+
+        return {
+                browser: match[ 1 ] || "",
+                version: match[ 2 ] || "0"
+        };
+};
+
+// Don't clobber any existing jQuery.browser in case it's different
+if ( !jQuery.browser ) {
+        matched = jQuery.uaMatch( navigator.userAgent );
+        browser = {};
+
+        if ( matched.browser ) {
+                browser[ matched.browser ] = true;
+                browser.version = matched.version;
+        }
+
+        // Chrome is Webkit, but Webkit is also Safari.
+        if ( browser.chrome ) {
+                browser.webkit = true;
+        } else if ( browser.webkit ) {
+                browser.safari = true;
+        }
+
+        jQuery.browser = browser;
+ 
+}
+
+  if(jQuery.browser.mozilla)
+	{		
+		jQuery('.nos_cours_prefere .elementor-column-wrap.elementor-element-populated').css('height', '38rem');
+	}
+});
+
+############################################################################
+
+J’accepte que les informations saisies         soient utilisées par SKIILLZ pour me contacter. 
+
+############################################################################
+	RECHERCHER UN MOT DANS UN FICHIER
+grep -r eb-my-courses-wrapper /*Rechercher */
+
+############################################################################
+RECONNAITRE A PARTIR DE JQUERY UN NAVIGATEUR 
+
+navigator.saysWho = (() => {
+  const { userAgent } = navigator
+  let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+  let temp
+
+  if (/trident/i.test(match[1])) {
+    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
+
+    return `IE ${temp[1] || ''}`
+  }
+
+  if (match[1] === 'Chrome') {
+    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera')
+    }
+
+    temp = userAgent.match(/\b(Edg)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('Edg', 'Edge (Chromium)')
+    }
+  }
+
+  match = match[2] ? [ match[1], match[2] ] : [ navigator.appName, navigator.appVersion, '-?' ]
+  temp = userAgent.match(/version\/(\d+)/i)
+
+  if (temp !== null) {
+    match.splice(1, 1, temp[1])
+  }
+
+  return match.join(' ')
+})()
+
+//console.log(navigator.saysWho) // outputs: `Chrome 89`
+ browser = navigator.saysWho;
+console.log(browser); 
+if(browser.indexOf('Firefox') >= 0)
+{
+	jQuery('.section_test')css('height', '30rem'); 
+	//jQuery('.nos_cours_prefere .elementor-column-wrap.elementor-element-populated').css('height', '30rem');
+       //jQuery('.bloc-nos-espaces-favoris .elementor-column-wrap.elementor-element-populated').css('height', '38rem');
+			
+}
+
+
+
+jQuery(document).ready(function() 
+{
+    navigator.saysWho = (() => {
+  const { userAgent } = navigator
+  let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+  let temp
+
+  if (/trident/i.test(match[1])) {
+    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
+
+    return `IE ${temp[1] || ''}`
+  }
+
+  if (match[1] === 'Chrome') {
+    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('OPR', 'Opera')
+    }
+
+    temp = userAgent.match(/\b(Edg)\/(\d+)/)
+
+    if (temp !== null) {
+      return temp.slice(1).join(' ').replace('Edg', 'Edge (Chromium)')
+    }
+  }
+
+  match = match[2] ? [ match[1], match[2] ] : [ navigator.appName, navigator.appVersion, '-?' ]
+  temp = userAgent.match(/version\/(\d+)/i)
+
+  if (temp !== null) {
+    match.splice(1, 1, temp[1])
+  }
+
+  return match.join(' ')
+})()
+
+//console.log(navigator.saysWho) // outputs: `Chrome 89`
+ browser = navigator.saysWho;
+console.log(browser); 
+if(browser.indexOf('Firefox') >= 0)
+{
+	jQuery('.section_test').css('height', '45rem');
+	//jQuery('.nos_cours_prefere .elementor-column-wrap.elementor-element-populated').css('height', '41rem');
+       //jQuery('.bloc-nos-espaces-favoris .elementor-column-wrap.elementor-element-populated').css('height', '38rem');
+			
+}
+else
+{
+    console.log('tsy firefox');
+}
+});
+
+#################################################################################################################
+var smallScreen = window.matchMedia("(max-width: 375px)");
+if (smallScreen.matches)
+{
+    jQuery('.section_button_formation').click(function() {
+        $('.sous_menu_hover').toggleClass('visible');
+    });
+}
+
+################################################################################################################
+CREATION MENU DROPDOWN HOVER 
+
+
+jQuery(document).ready(
+    function () {
+        jQuery("#menu_bouton_navbar .Bouton_formation").hover(function () 
+        {
+        	jQuery('.sous_menu_hover').css('display', 'block')  
+             jQuery('.sous_menu_hover').finish().slideDown('medium');
+          }, 
+          function () {
+             jQuery('.sous_menu_hover').finish().slideUp('medium');
+          }
+    );
+});
+
+################################################################################################################
+CODES JQUERY POUR CREER UN MENU AU SURVOL (HOVER) 
+
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function() { jQuery('.sous_menu_hover').show()},function()
+{ 
+    setTimeout(function(){
+    console.log(jQuery('.sous_menu_hover:hover').length)
+    if(jQuery('.sous_menu_hover:hover').length == 0)
+    {
+      jQuery('.sous_menu_hover').hide()
+    }
+},2000)
+})
+jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ jQuery(this).hide()})
+
+        jQuery("#menu_bouton_navbar .Bouton_formation").hover(function () 
+        {
+        	jQuery('.sous_menu_hover').css('display', 'block')  
+             jQuery('.sous_menu_hover').finish().slideDown('medium');
+          }, 
+          function () 
+          {
+             jQuery('.sous_menu_hover').finish().slideUp('medium');
+          }
+    );
+
+
+});
+
+
+jQuery('#menu_bouton_navbar .Bouton_formation').hover(function() { jQuery('.sous_menu_hover').show()},function()
+{ 
+    setTimeout(function(){
+    console.log(jQuery('.sous_menu_hover:hover').length)
+    if(jQuery('.sous_menu_hover:hover').length == 0)
+    {
+      jQuery('.sous_menu_hover').hide()
+    }
+},2000)
+})
+jQuery('.sous_menu_hover').off('mouseenter mouseleave').mouseleave(function(){ jQuery(this).hide()})
+
+        jQuery("#menu_bouton_navbar .Bouton_formation").hover(function () 
+        {
+        	jQuery('.sous_menu_hover').css('display', 'block')  
+             jQuery('.sous_menu_hover').finish().slideDown('medium');
+          }, 
+          function () 
+          {
+             jQuery('.sous_menu_hover').finish().slideUp('medium');
+          }
+    );
+
+
+##############################################################################################
+MODIFIER MOT DE PASSE DE MYSQL :
+    - Accèder à mysql :
+        sudo mysql
+    - Afficher les variables mot de passe :
+        SHOW VARIABLES LIKE '%pass%';
+    - Afficher les variables contenant 'validate_password'
+        SHOW VARIABLES LIKE '%validate_password%';
+    - Desactiver le check par nom d'utilisateur :
+        SET GLOBAL validate_password.check_user_name=OFF;
+    - Configurer le nombre de caractères à 4 :
+        SET GLOBAL validate_password.length=4;
+    - Mettre le 'case_count' à 0 :
+        SET GLOBAL validate_password.mixed_case_count=0;
+        SET GLOBAL validate_password.number_count=0;
+        SET GLOBAL validate_password.policy=LOW;
+        SET GLOBAL validate_password.special_char_count=0;
+    - Changer le mot de passe par le mot 'root' :
+        alter user 'root'@'localhost' identified with mysql_native_password by 'root';
+
+#####################################################################################
+CREATION DE Vhost sous ubuntu 
+        - Créer le dossier dans /var/www/html/nom_du_dossier 
+            sudo mkdir /var/www/monsite.fr
+        - Renseigner le nom du site dans DNS (liste des hosts)
+            sudo nano /etc/hosts
+        - Creer ou copier le fichier de configuration 
+            // Copier un fichier déjà existant 
+                sudo cp reqins-pro.conf mrstock.conf
+            //Créer un nouveau fichier 
+                sudo nano /etc/apache2/sites-available/mrstock.conf
+        - Activer le site 
+                sudo a2ensite mrstock.conf
+    
+####################################################################################
+IMPORTER ET EXPORTER BASE DE DONNEES 
+  Importer une base de donnée 
+      mysql -u nom_utilisateur_sql -p  nom_de_la_base < nom_de_la_base_à_importer.sql
+
+  Exporter une base de donnée
+     mysqldump -u nom_utilisateur_sql -p  nom_de_la_base > nom_de_la_base_à_exporter.sql
+
+####################################################################################
+Changer mot de passe d'un compte admin dans Prestashop 
+    - Accèder base de donnée du projet 
+    - Afficher les données dans la table ps_employee 
+    - Accèder au repertoire app > config 
+    - Ouvrir le fichier parameters.php 
+    - Copier la valeur de 'cookie_key'
+    - Copier la valeur de 'cookie_key' dans la colonne 'passwd' 
+    - taper le nouveau mot de passe après les valeurs et enregistrer 
+
+#####################################################################################
+CREATION VHOST SOUS LINUX
+  - Créer dossier dans /var/www/html/ecolomique
+  - Configurer le nom du site dans le DNS 
+      sudo nano /etc/hosts
+  - Activer le site 
+    sudo a2ensite ecolomique.loc.conf
+  - Recharger le service apache2
+    systemctl reload apache2
+  
+####################################################################################
+LES ESSENTIELS DES COMMANDES GIT 
+    GIT CONFIG :
+      Configurer les préférences de l'utilisateur : nom utilisateur et format de fichier
+          + git config --global user.email nom_email@gmail.com
+    
+    GIT INIT 
+     - Créer un nouveau dépôt git
+          + git init 
+    
+    GIT ADD 
+      - Permet d'ajouter un fichier dans le dépôt 
+          + git add nom_du_fichier_a_ajouter.txt 
+  
+    GIT CLONE 
+      - Permet de copier un dépôt distant vers le repertoire local 
+         + git clone https://chemin_du_depot_distant
+      - Permet de vérifier si le dépôt se trouve sur un serveur distant 
+         + git clone alex@93.188.160.58:/chemin/vers/dépôt
+     
+    GIT COMMIT 
+      - Permet de valider les modifications apportés et d'ajouter des commentaires concernant les modifications
+         + git commit –m'Description du commit'
+
+    GIT STATUS
+      - Affiche la liste des fichiers modifiés ainsi que les fichiers qui doivent encore être ajoutés ou validés 
+         + git status
+    
+    GIT PULL 
+      - Télécharger les modifications dans le serveur distant vers le dépôt local 
+         + git pull 
+
+    GIT PUSH 
+      - Envoyer les modifications dans la version distante
+
+#######################################################################################
+CREATION D'UN THEME ENFANT DANS WORDPRESS 
+    - Créer le dossier du thème dans wp-content/themes/nom_du_dossier_theme_du_theme_parent-child
+    - Créer un fichier "style.css" à l'intérieur du dossier
+        
+        + Contenu du fichier style.css :
+            /*
+                Theme Name: Soft Business child
+                Theme URI: http://creativthemes.com/downloads/soft-business/
+                Author: Creativ Themes
+                Author URI: http://creativthemes.com/
+                Description: Thème enfant Soft business.
+                Version: 1.0
+                Requires at least: 5.1
+                Requires PHP: 5.6
+                Tested up to: 5.9
+                License: GNU General Public License v2 or later
+                License URI: http://www.gnu.org/licenses/gpl-2.0.html
+                Text Domain: soft-business
+            */
+     - Créer le fichier index.php
+     - Créer le fichier "functions.php"
+     
+     - Contenu du fichier functions.php
+          <?php
+          /* Chargement des styles du parent. */
+        add_action( 'wp_enqueue_scripts', 'wpchild_enqueue_styles' );
+        function wpchild_enqueue_styles()
+        {
+          wp_enqueue_style( 'wpm-astra-style', get_template_directory_uri() . '/style.css' );
+        }
+     
+     - Activer le thème enfant
+        Apparence > Themes 
+########################################################################
+CREATION DE CPT ou Custom Post Type dans WORDPRESS
+- Accèder au fichier functions.php dans le thème enfant 
+- function my_cpt()
+{
+	// On rentre les différentes dénominations de notre custom post type qui seront affichées dans l'administration
+	$labels = array(
+		// Le nom au pluriel
+		'name'                => _x( 'Batiments', 'Post Type General Name'),
+		// Le nom au singulier
+		'singular_name'       => _x( 'Batiment', 'Post Type Singular Name'),
+		// Le libellé affiché dans le menu
+		'menu_name'           => __( 'Batiments'),
+		// Les différents libellés de l'administration
+		'all_items'           => __( 'Toutes les batiments'),
+		'view_item'           => __( 'Voir les batiments'),
+		'add_new_item'        => __( 'Ajouter une nouveau batiment'),
+		'add_new'             => __( 'Ajouter'),
+		'edit_item'           => __( 'Editer le batiment'),
+		'update_item'         => __( 'Modifier le batiment'),
+		'search_items'        => __( 'Rechercher un batiment'),
+		'not_found'           => __( 'Non trouvée'),
+		'not_found_in_trash'  => __( 'Non trouvée dans la corbeille'),
+	);
+
+	// On peut définir ici d'autres options pour notre custom post type
+	
+	$args = array(
+		'label'               => __( 'Batiments'),
+		'description'         => __( 'Tous sur batiments'),
+		'labels'              => $labels,
+		// On définit les options disponibles dans l'éditeur de notre custom post type ( un titre, un auteur...)
+		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+		/* 
+		* Différentes options supplémentaires
+		*/
+		'show_in_rest' => true,
+		'hierarchical'        => true,
+		'public'              => true,
+		'has_archive'         => true,
+		'rewrite'			  => array( 'slug' => 'batiments'),
+
+	);
+
+	// On enregistre notre custom post type qu'on nomme ici "serietv" et ses arguments
+	register_post_type( 'batiments', $args );
+}
+add_action( 'init', 'my_cpt', 0 );
+
+########################################################################        
+CREER UNE TABLE DANS LA BASE DE DONNEES WORDPRESS 
+    function jal_install () {
+   global $wpdb;
+
+   $table_name = $wpdb->prefix . "liveshoutbox"; 
+}
+
+################################################################################
+CREER UNE CHAINE AVEC TRADUCTION DANS WORDPRESS
+
+   __('LE TEXTE TRADUIT','LE NOM DU FICHIER DE TRADUCTION')
+
+#################################################################################
+SYNTAXE DE BASE jQuery dans Wordpress
+
+jQuery(function ($) {
+    $(#nav).show();
+});
+
+##################################################################################ù
+- Créer la fonction
+function mya_mvola_load_textdomain() {
+    load_plugin_textdomain( 'mya_mvola', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+- Joindre le callback
+ add_action( 'plugins_loaded', 'mya_mvola_load_textdomain' );
+
+############################################################################
+
+CREER UN SHORTCODE POUR AFFICHER LE NOM, LA DESCRIPTION COURTE ET LONGUE D'UN PRODUIT DANS LA PAGE COMMANDE 
+
+function description_Produits($atts)
+{
+	 extract(shortcode_atts(array(
+		'' => '',
+	 ), $atts));
+     
+     $product_id = array();
+     
+     global $woocommerce;
+     
+     $items = $woocommerce->cart->get_cart();
+     $product_names = array();
+     
+     echo '<h4>Votre commande comprend :</h4>';
+     
+     foreach($items as $item => $values) 
+     { 
+      $_product = $values['data']->post; 
+      $product_names[]=$_product->post_title; 
+      $short_description[] = $_product->post_excerpt;
+      $long_description[] = $_product->post_content;
+      //var_dump($long);
+     }
+    
+     foreach($product_names as $noms) 
+     {
+        echo '<pre>'.$noms;
+        echo '</pre>';
+     }
+
+     foreach($short_description as $short) 
+     {
+       echo '</pre>'.$short;
+        
+     }
+     foreach($long_description as $long) 
+     {
+       echo '</pre>'.$long;
+        
+     }
+}	
+
+add_shortcode('description_Produits', 'description_Produits');
+
+#####################################################################
+
+RECUPERER L'ID D'UN PRODUIT DANS PRESTASHOP 1.6
+  $id_product  = (int)Tools::getValue('id_product');
+
+########################################################################
+
+OVERRIDE DE TEMPLATES DU PLUGIN WOOCOMMERCE DANS WORDPRESS
+
+ - Copier le fichier /wp-content/plugins/woocommerce/templates/checkout/payment-method.php
+
+ - Coller dans le repertoire du thème ou thème enfant en créant le dossier woocommerce et enlever le repertoire "templates" 
+ 
+ /wp-content/themes/nom_du_thème/woocommerce/checkout/payment-method.php
+
+ ########################################################################
+  
+  RECUPERER L'URL DANS UNE PAGE PHP DANS PRESTASHOP 
+
+  $CurrentUrl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+#########################################################################
+FAIRE UN VAR DUMP D'UNE VARIABLE SMARTY DANS UN TEMPLATE .tpl DANS PRESTASHOP 
+
+{$var|@var_dump}
+
+
+#########################################################################
+CHANGER MOT DE PASSE COMPTE ADMIN AVEC COOKIES KEY 
+    - Accèder à la base de données du projet
+    - Accèder à la table ps_employee
+    - Choisir un compte admin dans la liste
+    - Accèder au fichier app/config/parameters.php
+    - Copier la valeur de 'cookie_key'
+    - Modifier la colonne 'passwd' et coller la valeur de 'cookie_key' suivi du nouveau mot de passe 
+    - cliquer sur le menu déroulant et selectionner 'md5'
+
+##########################################################################
+AJOUTER FICHIER JAVASCRIPT ET JQUERY EXTERNES DANS PRESTASHOP 
+  - Accèder au fichier override/classes/controller/ FrontController.php
+  - 
+
+###########################################################################
+OVERRIDE DANS PRESTASHOP 
+    OVERRIDE DE MODULES DANS PRESTASHOP
+     
+      + Override classe principale d'un module  
+        - Créer un fichier en respectant l'arborescence du repertoire du fichier 
+            fichier original : /modules/<nom_du_module>/nom_classe_principale
+            fichier override : /override/modules/<nom_du_module>/nom_classe_principale
+
+        - Ajouter suffixe "Override" et extends sur le nom de la classe 
+                  "Labproductcategory" => "LabproductcategoryOverride" et 
+                  extends "Module" => "Labproductcategory"    
+        Fichier original : class Labproductcategory extends Module {
+
+        }
+
+        Fichier Override : class LabproductcategoryOverride extends Labproductcategory {
+
+        }
+      
+     + Override Controller 
+        - Respecter l'arborescence des fichiers 
+         fichier original : /controllers/front/ProductController.php 
+         fichier override : /override/controllers/front/ProductController.php
+
+        -Enlever le suffixe "Core" sur le nom de la classe 
+          ProductControllerCore => ProductController
+          et extends ProductPresentingFrontControllerCore => ProductControllerCore
+        
+        Fichier original : 
+        
+        class ProductControllerCore extends ProductPresentingFrontControllerCore
+        {
+
+        }
+
+        Fichier override :
+
+        class ProductController extends ProductControllerCore 
+        {
+
+        } 
+        
+       + Override de template front 
+          - Les templates dans le front peuvent être overridé 
+          - Pour les templates front modules : accèder au thème activé /themes/<nom_du_theme_actif>/<nom_du_module>/<nom_du_template.tpl>
+        
+          - Pour les autres templates, vérifier dans le dossier /themes/<nom_du_theme_actif>/templates/ 
+
+###########################################################################
+ECRIRE DU CODE JAVASCRIPT DANS UN TEMPLATE PRESTASHOP 
+  <script type="text/javascript">
+    {literal}
+        //Contenu du code javascript
+        const button = document.getElementsByClassName('caret');
+    {/literal}
+</script>
+
+###########################################################################
+VERIFICATION TEMPLATE DANS UN MODULE DANS PRESTASHOP 1.7
+  - Pour modifier un template, il faut vérifier les surcharges(override)
+  - Les surcharges de templates sont dans le répertoire /thème/modules/nom_du_module
+
+
+
+############################################################################
+
+UTILISATION DU AP PAGE BUILDER AP HOOK BUILDER PRESTASHOP 
+  Ap profiles Manage : Modification du homepage
+  Ap Product Details Builder : Modification de la page produit
+
+############################################################################
+ACTIVATION ET DESACTIVATION DE LA VERSION DE PHP
+    - Créer un fichier phpinfo.php dans la racine du projet 
+      + Contenu du fichier phpinfo.php : 
+            <?php
+              // Affiche toutes les informations, comme le ferait INFO_ALL
+              phpinfo();
+
+    - Accèder via URL le fichier http://www.mlv.loc/phpinfo.php
+    
+    ACTIVATION D'UNE VERSION DE PHP :
+        sudo a2enmod php7.4
+      + Redémarrer les services apache 
+        sudo service apache2 restart 
+    
+    DESACTIVATION D'UNE VERSION DE PHP :
+        sudo a2dismod php7.1
+        + Redémarrer les services apache 
+        sudo service apache2 restart 
+
+############################################################################
+RECUPERER ID DE LA CATEGORIE COURANTE DANS UN TEMPLATE AVEC SMARTY DANS PRESTASHOP 
+
+{assign var='cats' value=Product::getProductCategories($product.id)}
+{$cats|@var_dump}
+
+##############################################################################
+APPEL DE FICHIER CSS DANS UN THEME WORDPRESS 
+  - Ouvrir le fichier functions.php du thème actif 
+  - /**
+ * Enqueue styles
+ */
+function child_enqueue_styles()
+{
+
+    wp_enqueue_style('astra-child-theme-css', get_stylesheet_directory_uri() . '/fusion-011221-04.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all');
+    /* Appel fichier css */
+
+
+    wp_enqueue_style('theme-child-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all');
+
+    wp_enqueue_style('tableau-theme-css', get_stylesheet_directory_uri() . '/css/tableau-v4.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all');
+    wp_enqueue_script('custom-script.js', get_stylesheet_directory_uri() . '/js/simplebar.min.js', array('jquery'));
+
+}
+
+###########################################################################################
+CREER UN COMPTE DANS WOOCOMMERCE BRAINTREE PAYPAL SANDBOX 
+  - Se connecter dans le site de Braintree 
+      + site : https://www.braintreepayments.com/sandbox
+  
+  - Remplir les champs dans "Sign up for the sandbox"
+  - Consulter le lien dans le compte email correspondant (cf : se souvenir du champ Where is your Business is Located? "United States")
+  - Cliquer sur le lien dans le mail et remplir les champs
+  - On accède à la fenêtre contenant "Sandbox Keys & Configuration"
+    + Copier les valeurs de Merchant ID, Public Key et Private key dans l'onglet Woocommerce > Réglages > Paiements 
+  
+  - Créer un compte Paypal avec le champ "Pays" même que pour le compte Braintree sandbox (cf : se souvenir du champ Where is your Business is Located? "United States") 
+      + Selectionner un compte en tant que "Business"
+  
+  - Cliquer sur le bouton "Create app" 
+  - Ouvrir l'onglet paramètres dans la fenêtre Braintree https://sandbox.braintreegateway.com/merchants/cccshfxjwzbjr3rh/home (ilay icone bilao kely) > Processing 
+
+  - Selectionner le bouton "link sandbox" et copier les valeurs dans app crée dans Paypal 
+  - Dans l'onglet Paypal > Cliquer sur le bouton "Add webhook" et cocher tous les options
+  - Coller chacunes des valeurs correspondantes : 
+  Sandbox account, Client ID
+
+    Réference : https://developer.paypal.com/braintree/docs/guides/paypal/testing-go-live/php#linked-paypal-testing
+
+###########################################################################
+
+OBTENIR MONTANT CART PANIER  PRESTASHOP 1.7
+  
+  PHP :
+      $this->context->cart->getOrderTotal(true, Cart::BOTH);
+  SMARTY :
+      {$cart.totals.total.amount}
+      
+###########################################################################
+LOGIN ET MDP Github 
+
+username : Narindra91
+mot de passe : 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
+
+###########################################################################
+IMPORTATION ET EXPORTATION DE BASE DE DONNEES DANS PRESTASHOP 1.7
+  *EXPORTATION
+    
+    + Télécharger la base de données dans l'ordinateur 
+      Methode 1 : PHPMyadmin 
+          - Sélectionner la base de donnée > Exporter 
+      Methode 2 : Adminer
+          - Télécharger le fichier adminer.php 
+          - Mettre le fichier adminer.php dans la racine du projet 
+          - Taper dans l'URL : url_du_site/adminer.php
+          - Accèder à l'onglet exporter (format sql ou zip)
+      Methode 3 : Ligne de commande 
+          - Accèder au terminal > répertoire du projet 
+          - mysql -u nom_utilisateur_sql -p  nom_de_la_base > nom_de_la_base_à_importer.sql
+  
+  *IMPORTATION 
+    +  Methode 1 : PHPMyadmin
+          - Sélectionner la base de donnée > Importer 
+    + Methode 2 : Adminer 
+          - Télécharger le fichier adminer.php 
+          - Mettre le fichier adminer.php dans la racine du projet 
+          - Taper dans l'URL : url_du_site/adminer.php
+          - Accèder à l'onglet importer (format sql ou zip)
+
+    * Changement des tables dans la base de données 
+          - Accèder à la table "ps_configuration"
+          - Chercher dans la colonne "name" LIKE %..% valeur = SSL 
+          - Changer la valeur de la colonne "name PS_SSL_ENABLED" value "1" à 0
+          - Changer la valeur de la colonne "name PS_SSL_ENABLED_EVERYWHERE" value "1" à 0
+          - Changer la valeur de la colonne "name PS_SHOP_DOMAIN_SSL" "Url correspondante"
+
+##########################################################################################
+RECUPERATION D'UN COMPTE DANS WORDPRESS 
+    + Accèder au PHPMyadmin correspondant au projet 
+    + Accèder au nom de la base de données configurés pour le projet 
+    + Accèder à la table "wp_users" :
+        - Supprimer la valeur dans mot de passe 
+        - Génerer un mot de passe MD5 hash encrypt
+        - Coller le nouveau mot de passé hashé dans la colonne mot de passe 
+
+############################################################################################
+CREER UN PLUGIN DANS PRESTASHOP 1.7
