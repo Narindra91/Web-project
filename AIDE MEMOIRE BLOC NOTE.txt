@@ -918,11 +918,13 @@ ACTIVATION ET DESACTIVATION DE LA VERSION DE PHP
     
     ACTIVATION D'UNE VERSION DE PHP :
         sudo a2enmod php7.4
+        sudo update-alternatives --set php /usr/bin/php7.4
       + Redémarrer les services apache 
         sudo service apache2 restart 
     
     DESACTIVATION D'UNE VERSION DE PHP :
         sudo a2dismod php7.1
+        sudo update-alternatives --set php /usr/bin/php7.1
         + Redémarrer les services apache 
         sudo service apache2 restart 
 
@@ -1034,3 +1036,15 @@ RECUPERATION D'UN COMPTE DANS WORDPRESS
 
 ############################################################################################
 CREER UN PLUGIN DANS PRESTASHOP 1.7
+- Créer le dossier dans le repertoire /modules (Le nom du doosier, le fichier principal //$this->name = 'transport_rapide'; doivent porter le même nom )
+
+############################################################################################
+INSTALLATION ET CREATION DE PROJET SYMFONY 
+
+- Ouvrir le dossier contenant le projet dans un terminal
+- Installer Composer par les commandes :
+   + php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+   + php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+   + php composer-setup.php
+   + php -r "unlink('composer-setup.php');"
+- Installer Symfony CLI dans le repertoire contenant le projet 
