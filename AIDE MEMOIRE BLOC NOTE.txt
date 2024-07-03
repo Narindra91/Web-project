@@ -991,7 +991,7 @@ OBTENIR MONTANT CART PANIER  PRESTASHOP 1.7
 LOGIN ET MDP Github 
 
 username : Narindra91
-mot de passe : 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
+mot de passe : N@rindra1991
 
 ###########################################################################
 IMPORTATION ET EXPORTATION DE BASE DE DONNEES DANS PRESTASHOP 1.7
